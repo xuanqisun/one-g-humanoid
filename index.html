@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="ONE-G 人形技术展示：自然遥操、跨本体迁移与高效动作学习。观看真机与仿真演示，了解 SONIC、Any2Any、MorphMimic 和 SuperMimic 技术路线。">
+  <meta property="og:title" content="ONE-G · Humanoid capabilities in motion">
+  <meta property="og:description" content="人的动作。机器人的能力。探索 ONE-G 的遥操、跨本体迁移与动作学习。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://xuanqisun.github.io/one-g-humanoid-showcase/assets/images/kick-poster.jpg">
+  <title>ONE-G · 人形能力，正在发生</title>
+  <link rel="icon" type="image/svg+xml" href="assets/brand/one-g-symbol.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to content">跳至正文</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="ONE-G 首页"><img src="assets/brand/one-g-black.png" width="112" height="52" alt="ONE-G Robotics"></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#capabilities" data-en="Capabilities">能力</a>
+      <a href="#technology" data-en="Technology">技术路线</a>
+      <a href="#demos" data-en="Demos">演示库</a>
+    </nav>
+    <div class="header-actions">
+      <button class="language-switch" id="language-toggle" type="button" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button>
+      <a class="button small" href="#teleoperation" data-en="Explore <span aria-hidden='true'>↗</span>">探索能力 <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy shell">
+        <p class="eyebrow"><span class="status-dot"></span> ONE-G · HUMANOID ROBOTICS</p>
+        <h1 id="hero-title" data-en="Human motion.<br><span>Robot capability.</span>">人的动作。<br><span>机器人的能力。</span></h1>
+        <p class="hero-lede" data-en="From natural teleoperation to new robot bodies.<br>Turning advances in motion learning into capabilities you can see.">从自然遥操到跨本体迁移。<br>让动作学习的前沿进展，成为看得见的能力。</p>
+        <a class="text-link" href="#capabilities" data-en="Discover the capabilities <span aria-hidden='true'>↓</span>">探索人形能力 <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="hero-film shell">
+        <div class="hero-film-frame">
+          <video id="hero-video" src="assets/videos/wholebody-kick.mp4" poster="assets/images/kick-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="ONE-G G1 全身遥操真机演示"></video>
+          <span class="film-badge"><span class="status-dot"></span><span data-en="ONE-G · REAL ROBOT">ONE-G · 真机演示</span></span>
+          <div class="film-title"><span data-en="Whole-body teleoperation">全身遥操</span><strong data-en="Move together.">人与机器人，同步行动。</strong></div>
+          <button class="round-button hero-pause" id="hero-pause" type="button" aria-label="暂停首屏视频"><span aria-hidden="true">Ⅱ</span></button>
+        </div>
+        <figcaption><span data-en="Unitree G1 · ONE-G demonstration">Unitree G1 · ONE-G 演示</span><span data-en="HUMAN INTENT → WHOLE-BODY MOTION">HUMAN INTENT → WHOLE-BODY MOTION</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="capability-index shell" id="capabilities" aria-labelledby="capabilities-title">
+      <div class="index-intro"><h2 id="capabilities-title" data-en="Three capabilities.<br>One direction.">三种能力。<br>同一个方向。</h2><p data-en="More natural control. More adaptable bodies.<br>More efficient learning.">更自然地控制。更灵活地迁移。<br>更高效地学习。</p></div>
+      <div class="index-links">
+        <a href="#teleoperation"><span class="index-num">01 / TELEOPERATE</span><strong data-en="Move intuitively.">自然遥操</strong><span data-en="Human intent, coordinated robot motion.">把人的意图，变成协调的机器人动作。</span><i aria-hidden="true">↘</i></a>
+        <a href="#embodiment"><span class="index-num">02 / TRANSFER</span><strong data-en="Go beyond one body.">跨本体迁移</strong><span data-en="Bring motion capabilities to new robot bodies.">让动作能力，适配不同的机器人身体。</span><i aria-hidden="true">↘</i></a>
+        <a href="#learning"><span class="index-num">03 / LEARN</span><strong data-en="Learn with less compute.">高效动作学习</strong><span data-en="Explore better control with a smaller GPU budget.">用更可控的算力，探索更丰富的动作。</span><i aria-hidden="true">↘</i></a>
+      </div>
+    </section>
+
+    <section class="chapter soft-section" id="teleoperation" aria-labelledby="teleop-heading">
+      <div class="shell">
+        <div class="section-heading"><p class="eyebrow">01 / TELEOPERATE</p><h2 id="teleop-heading" data-en="Your intent.<br><span>Its next move.</span>">你的意图。<br><span>它的下一步。</span></h2><p class="section-lede" data-en="Choose the input that fits the task. Three-point control for a lighter setup; full-body tracking for richer motion.">按任务选择输入方式。三点遥操轻量上手，全身追踪传递更完整的动作。</p></div>
+        <div class="segmented" role="tablist" aria-label="Teleoperation modes">
+          <button role="tab" id="mode-three" aria-controls="teleop-panel" aria-selected="true" data-mode="three" data-en="3-point control">三点遥操</button>
+          <button role="tab" id="mode-full" aria-controls="teleop-panel" aria-selected="false" tabindex="-1" data-mode="full" data-en="Whole-body control">全身遥操</button>
+        </div>
+        <div class="teleop-panel" id="teleop-panel" role="tabpanel" aria-labelledby="mode-three">
+          <div class="teleop-copy"><span class="pill" data-en="ONE-G · REAL ROBOT">ONE-G · 真机演示</span><h3 id="mode-title">三个追踪点，<br>一个完整的身体。</h3><p id="mode-description">通过头部与双手传递上身意图，配合导航输入控制移动。支持手柄和手部追踪两种交互方式，无需脚踝追踪器。</p><dl class="mode-facts"><div><dt data-en="INPUT">输入</dt><dd id="mode-input">头显 + 手柄 / 手部追踪</dd></div><div><dt data-en="CAPABILITY">效果</dt><dd id="mode-effect">上身动作与移动协调控制</dd></div></dl><button class="text-link route-link" data-route="sonic" data-en="Explore the SONIC route <span aria-hidden='true'>↗</span>">查看 SONIC 技术路线 <span aria-hidden="true">↗</span></button></div>
+          <div class="teleop-media"><video id="teleop-video" data-src="assets/videos/dual-mode-real.mp4" poster="assets/images/dual-mode-real.jpg" controls muted loop playsinline preload="none" aria-label="ONE-G 三点遥操演示"></video></div>
+        </div>
+        <div class="section-note"><span class="mini-line"></span><p data-en="SONIC provides the whole-body control foundation. ONE-G demonstrations show the interaction and deployment in practice.">以 SONIC 为全身控制基础，呈现 ONE-G 的交互与部署演示。</p></div>
+      </div>
+    </section>
+
+    <section class="chapter" id="embodiment" aria-labelledby="embodiment-heading">
+      <div class="shell">
+        <div class="section-heading"><p class="eyebrow">02 / TRANSFER</p><h2 id="embodiment-heading" data-en="Different bodies.<br><span>Shared possibilities.</span>">身体不同。<br><span>能力可以相通。</span></h2><p class="section-lede" data-en="Adapt existing policies, or train a shared model across bodies. Two complementary routes to cross-embodiment control.">适配已有策略，或训练跨本体共享模型。两条互补路线，让能力不止于一种机器人。</p></div>
+        <div class="robot-grid">
+          <figure class="robot-demo"><div class="video-frame"><video data-src="assets/videos/h2-morphmimic.mp4" poster="assets/images/h2-morphmimic.jpg" controls muted loop playsinline preload="none" aria-label="ONE-G H2 MorphMimic 仿真演示"></video></div><figcaption><div><h3>H2</h3><p data-en="MorphMimic · ONE-G simulation">MorphMimic · ONE-G 仿真演示</p></div><span class="pill light" data-en="SIMULATION">仿真</span></figcaption></figure>
+          <figure class="robot-demo"><div class="video-frame"><video data-src="assets/videos/x2-morphmimic.mp4" poster="assets/images/x2-morphmimic.jpg" controls muted loop playsinline preload="none" aria-label="ONE-G X2 MorphMimic 仿真演示"></video></div><figcaption><div><h3>X2</h3><p data-en="MorphMimic · ONE-G simulation">MorphMimic · ONE-G 仿真演示</p></div><span class="pill light" data-en="SIMULATION">仿真</span></figcaption></figure>
+        </div>
+        <div class="route-pair">
+          <article><span class="route-kicker" data-en="ADAPT AN EXISTING POLICY">适配已有策略</span><h3>Any2Any<span aria-hidden="true">↗</span></h3><p data-en="Align kinematics, freeze the backbone, and use LoRA to adapt dynamics-sensitive components to a target robot.">运动学对齐，冻结策略主干，用 LoRA 适配动力学敏感模块，将已有控制能力迁移到目标机器人。</p><button class="text-link route-link" data-route="any2any" data-en="See the method">查看技术路线</button></article>
+          <article><span class="route-kicker" data-en="TRAIN A SHARED MODEL">训练共享模型</span><h3>MorphMimic<span aria-hidden="true">↗</span></h3><p data-en="Condition a shared world model and controller on robot morphology, aligning motion representations across bodies.">将形态信息输入共享世界模型与控制器，对齐跨机器人动作表示，让一套模型学习多种身体。</p><button class="text-link route-link" data-route="morphmimic" data-en="See the method">查看技术路线</button></article>
+        </div>
+        <p class="fine-print" data-en="The H2 and X2 clips are supplied ONE-G demonstrations, not Any2Any results. H2 is an extension beyond the embodiments evaluated in the MorphMimic paper.">H2、X2 视频为 ONE-G 提供的演示，不作为 Any2Any 实验结果。H2 属于原 MorphMimic 论文验证本体之外的扩展演示。</p>
+      </div>
+    </section>
+
+    <section class="chapter learning-section" id="learning" aria-labelledby="learning-heading">
+      <div class="shell">
+        <div class="section-heading"><p class="eyebrow">03 / LEARN</p><h2 id="learning-heading" data-en="More motion.<br><span>Less compute.</span>">更丰富的动作。<br><span>更可控的算力。</span></h2><p class="section-lede" data-en="Differentiable world models open a practical path to efficient motion learning, within a limited GPU budget.">借助可微世界模型，探索在有限 GPU 预算下高效学习动作的技术路径。</p></div>
+        <div class="compute-grid">
+          <article class="compute-card"><div class="compute-top"><h3>SuperMimic</h3><span class="pill" data-en="PAPER RESULT">论文结果</span></div><p class="compute-number">1 <span>GPU</span></p><p class="compute-time" data-en="3 hours · NVIDIA H100">3 小时 · NVIDIA H100</p><p data-en="Surpasses the normalized return of the released SONIC checkpoint in the authors’ benchmark.">在作者基准中，超过已发布 SONIC checkpoint 的归一化回报。</p><button class="text-link route-link" data-route="supermimic" data-en="How the world model helps <span aria-hidden='true'>↗</span>">世界模型如何提高效率 <span aria-hidden="true">↗</span></button></article>
+          <article class="compute-card"><div class="compute-top"><h3>MorphMimic</h3><span class="pill" data-en="PAPER RESULT">论文结果</span></div><p class="compute-number">3 <span>GPUs</span></p><p class="compute-time" data-en="5 h 26 min · NVIDIA H100 NVL">5 小时 26 分钟 · NVIDIA H100 NVL</p><p data-en="A unified model for G1, X2 Ultra and T2. A shared set of weights across different embodiments.">训练覆盖 G1、X2 Ultra 与 T2 的统一模型，在不同本体间共享一套权重。</p><button class="text-link route-link" data-route="morphmimic" data-en="How a shared model works <span aria-hidden='true'>↗</span>">共享模型如何工作 <span aria-hidden="true">↗</span></button></article>
+        </div>
+        <p class="compute-footnote" data-en="Published research results, not ONE-G training measurements. Hardware, data and evaluation protocols differ across papers. SuperMimic’s benchmark includes training motions and measures motion coverage; these figures are not a direct head-to-head ranking.">以上为原论文结果，并非 ONE-G 自测训练指标。两篇论文的硬件、数据与评估协议不同；SuperMimic 基准包含训练动作，衡量动作覆盖能力，不能据此直接横向排名。</p>
+        <div class="learning-strip"><div><span class="route-kicker" data-en="THE UNDERLYING IDEA">核心思路</span><h3 data-en="Learn the dynamics.<br>Then learn through them.">先学习运动规律。<br>再通过模型优化动作。</h3></div><div class="mini-pipeline"><span data-en="Simulation data">仿真采样</span><i>→</i><span data-en="World model">世界模型</span><i>→</i><span data-en="Policy update">策略更新</span><small data-en="A repeating learning loop">循环迭代</small></div></div>
+      </div>
+    </section>
+
+    <section class="chapter technology" id="technology" aria-labelledby="technology-heading">
+      <div class="shell">
+        <div class="section-heading compact"><p class="eyebrow" data-en="UNDER THE HOOD">技术路线</p><h2 id="technology-heading" data-en="See how it works.">能力背后的方法。</h2><p class="section-lede" data-en="From inputs to control. Explore the original figures and the research behind each route.">从输入到控制，展开每条路线，查看原论文配图与方法来源。</p></div>
+        <div class="tech-tabs" role="tablist" aria-label="Research methods"><button id="tab-sonic" role="tab" aria-controls="tech-panel" aria-selected="true" data-tech="sonic">SONIC</button><button id="tab-any2any" role="tab" aria-controls="tech-panel" aria-selected="false" tabindex="-1" data-tech="any2any">Any2Any</button><button id="tab-morphmimic" role="tab" aria-controls="tech-panel" aria-selected="false" tabindex="-1" data-tech="morphmimic">MorphMimic</button><button id="tab-supermimic" role="tab" aria-controls="tech-panel" aria-selected="false" tabindex="-1" data-tech="supermimic">SuperMimic</button></div>
+        <div class="tech-panel" id="tech-panel" role="tabpanel" aria-labelledby="tab-sonic">
+          <div class="tech-intro"><div><span class="route-kicker" id="tech-category"></span><h3 id="tech-title"></h3></div><p id="tech-description"></p></div>
+          <ol class="tech-flow" id="tech-flow"></ol>
+          <figure class="paper-figure"><button type="button" class="figure-button" id="figure-open" aria-label="放大论文原图"><img id="tech-image" src="assets/papers/sonic-overview.png" alt="SONIC 原论文方法概览" loading="lazy" width="1600" height="600"><span class="zoom-hint" data-en="View figure ↗">放大原图 ↗</span></button><figcaption><span id="tech-caption"></span><a id="tech-source" href="https://nvlabs.github.io/GEAR-SONIC/" target="_blank" rel="noopener noreferrer" data-en="Original source ↗">原图来源 ↗</a></figcaption></figure>
+          <div class="tech-bottom"><p id="tech-note"></p><div class="paper-links"><a class="button outline" id="tech-paper" href="https://arxiv.org/abs/2511.07820" target="_blank" rel="noopener noreferrer" data-en="Read paper ↗">阅读论文 ↗</a><a class="text-link" id="tech-project" href="https://nvlabs.github.io/GEAR-SONIC/" target="_blank" rel="noopener noreferrer" data-en="Project page ↗">项目主页 ↗</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter soft-section demo-section" id="demos" aria-labelledby="demos-heading">
+      <div class="shell">
+        <div class="library-heading"><div><p class="eyebrow" data-en="IN MOTION">更多演示</p><h2 id="demos-heading" data-en="Watch the capabilities.">把能力，放进画面。</h2></div><p data-en="Explore more ONE-G demonstrations.<br>Real robots and simulation, clearly labeled.">继续探索 ONE-G 演示。<br>真机与仿真，逐一标注。</p></div>
+        <div class="filter-row" role="group" aria-label="Filter demonstrations"><button class="filter active" data-filter="all" aria-pressed="true" data-en="All">全部</button><button class="filter" data-filter="real" aria-pressed="false" data-en="Real robot">真机</button><button class="filter" data-filter="simulation" aria-pressed="false" data-en="Simulation">仿真</button><span id="demo-count" aria-live="polite"></span></div>
+        <div class="demo-grid" id="demo-grid"></div>
+        <button class="button outline load-more" id="show-all" data-en="Show all demonstrations ↓">展开全部演示 ↓</button>
+      </div>
+    </section>
+
+    <section class="closing shell"><p class="eyebrow">ONE-G ROBOTICS</p><h2 data-en="From motion.<br>To possibility.">从一个动作。<br><span>到更多可能。</span></h2><p data-en="Explore the demonstrations, understand the methods,<br>and see what comes next for humanoid control.">看见能力，理解方法。<br>一起探索人形机器人的下一步。</p><a class="button" href="#top" data-en="Back to the beginning ↑">回到开始 ↑</a></section>
+  </main>
+  <footer class="site-footer shell"><a href="#top" aria-label="ONE-G 首页"><img src="assets/brand/one-g-black.png" width="112" height="52" alt="ONE-G Robotics"></a><p data-en="© 2026 ONE-G. Demonstrations by ONE-G.<br>Research methods and figures are credited to their respective authors.">© 2026 ONE-G。演示素材由 ONE-G 提供。<br>研究方法与论文配图归属原作者，来源见技术路线。</p><a href="https://github.com/xuanqisun/one-g-humanoid-showcase" target="_blank" rel="noopener noreferrer">GitHub ↗</a></footer>
+
+  <dialog id="media-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><h2 id="dialog-title"></h2><button class="round-button" id="dialog-close" aria-label="关闭 / Close">✕</button></div><div id="dialog-content"></div><p id="dialog-caption"></p></dialog>
+  <noscript><p class="noscript-note">请启用 JavaScript 以切换演示和技术路线。论文主页：<a href="https://nvlabs.github.io/GEAR-SONIC/">SONIC</a> · <a href="https://any2any.top/">Any2Any</a> · <a href="https://lzyang2000.github.io/morphmimic/">MorphMimic</a> · <a href="https://supermimic.github.io/">SuperMimic</a></p></noscript>
+</body>
+</html>
