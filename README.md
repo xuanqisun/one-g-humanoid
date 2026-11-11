@@ -19,7 +19,7 @@ GitHub Pages 使用 `.github/workflows/pages.yml` 发布，Source 设为 GitHub 
 ## Content
 
 - 遥操作：三点与全身两种入口；三点遥操使用双模式真机视频，全身遥操使用俯身抓取视频。
-- 跨本体：MorphMimic 分两行展示 X2、H2，另有 Any2Any × SONIC–H2；每组 3 个白底动作，可暂停或放大播放。X2 在上排，并标注 ONE-G 真实物理仿真。
+- 跨本体：MorphMimic 分两行展示智元 X2、宇树 H2，另有 Any2Any × SONIC–宇树 H2；每组 3 个白底动作，可暂停或放大播放。X2 在上排；全部标注 ONE-G 真实物理仿真，仅显示技术路线与机器人型号，不展示单个动作名。
 - 高效学习：SuperMimic–G1 的后空翻、侧手翻、前空翻演示；论文 GPU 指标单独标注，不表述为 ONE-G 自测。
 - 技术路线：SONIC、Any2Any、MorphMimic、SuperMimic 原论文/项目图、步骤和原始来源。
 - 演示库：原网站演示与保留的 X2 MorphMimic 视频，支持真机/仿真筛选与弹窗播放。

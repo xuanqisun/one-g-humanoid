@@ -98,6 +98,9 @@ function createIcon(name) {
 function loadVideo(video) {
   if (video.dataset.src) {video.src = video.dataset.src; delete video.dataset.src; video.load();}
 }
+function motionSource(item) {
+  return language==='en'?(item.dataset.motionSourceEn||item.dataset.motionSource):item.dataset.motionSource;
+}
 function updateMotionControls() {
   $$('.motion-showcase').forEach(gallery=>{
     const paused=motionStates.get(gallery.id)?.paused ?? true;
@@ -106,7 +109,11 @@ function updateMotionControls() {
     $('.motion-control-icon use',button).setAttribute('href',paused?'#icon-play':'#icon-pause');
     button.setAttribute('aria-label',language==='zh'?(paused?'播放这组演示':'暂停这组演示'):(paused?'Play these demonstrations':'Pause these demonstrations'));
     $('.motion-control-label',button).textContent=language==='zh'?(paused?'播放':'暂停'):(paused?'Play':'Pause');
-    $$('.motion-item',gallery).forEach(item=>$('.motion-open',item).setAttribute('aria-label',`${language==='zh'?'放大播放':'Play enlarged'}: ${$('h3',item).textContent}`));
+    $$('.motion-item',gallery).forEach(item=>{
+      const number=$$('.motion-item',item.parentElement).indexOf(item)+1;
+      const label=$('h3',item)?.textContent||`${motionSource(item)} · ${language==='zh'?'演示':'Demo'} ${number}`;
+      $('.motion-open',item).setAttribute('aria-label',`${language==='zh'?'放大播放':'Play enlarged'}: ${label}`);
+    });
   });
 }
 function syncMotionPlayback() {
@@ -220,12 +227,14 @@ $$('.motion-open').forEach(button=>button.addEventListener('click',()=>{
   video.src=inline.currentSrc||inline.dataset.src||inline.src;
   video.poster=inline.poster;
   video.controls=false;video.playsInline=true;video.loop=true;video.preload='metadata';video.muted=true;video.dataset.silent='true';
-  const title=$('h3',item).textContent;
+  const heading=$('h3',item);
+  const source=motionSource(item);
+  const title=heading?.textContent||source;
   video.setAttribute('aria-label',title);
   const environment=item.dataset.motionEnvironment==='physics'
     ? (language==='zh'?'ONE-G 真实物理仿真':'ONE-G physics simulation')
     : (language==='zh'?'ONE-G 仿真':'ONE-G simulation');
-  openDialog(title,video,`${item.dataset.motionSource} · ${environment}`,button);
+  openDialog(title,video,heading?`${source} · ${environment}`:environment,button);
   video.play().catch(()=>{});
 }));
 $$('[data-route]').forEach(button=>button.addEventListener('click',()=>{setMethod(button.dataset.route);$('#technology').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}));
