@@ -168,7 +168,7 @@ function openDialog(title, node, caption, trigger) {
   lastDialogTrigger = trigger;
   $$('video').forEach(video => video.pause());
   $('#dialog-title').textContent=title;
-  $('#dialog-content').replaceChildren(node);
+  $('#dialog-content').replaceChildren(node.tagName==='VIDEO'?createVideoPlayer(node):node);
   $('#dialog-caption').textContent=caption;
   $('#media-dialog').showModal();
   $('#dialog-close').focus();
@@ -186,7 +186,7 @@ function renderDemos() {
     const heading=document.createElement('h3');heading.textContent=text(demo.title);
     const detail=document.createElement('p');detail.textContent=text(demo.detail);
     article.append(button,heading,detail);
-    button.addEventListener('click',()=>{const video=document.createElement('video');video.src=`assets/videos/${demo.video}`;video.poster=img.src;video.controls=true;video.playsInline=true;video.preload='metadata';video.setAttribute('aria-label',text(demo.title));openDialog(text(demo.title),video,`ONE-G · ${status.textContent} · ${text(demo.detail)}`,button);video.play().catch(()=>{});});
+    button.addEventListener('click',()=>{const video=document.createElement('video');video.src=`assets/videos/${demo.video}`;video.poster=img.src;video.controls=false;video.playsInline=true;video.preload='metadata';video.setAttribute('aria-label',text(demo.title));openDialog(text(demo.title),video,`ONE-G · ${status.textContent} · ${text(demo.detail)}`,button);video.play().catch(()=>{});});
     return article;
   }));
   $('#demo-count').textContent=language==='zh'?`${filtered.length} 段演示`:`${filtered.length} demonstrations`;
@@ -219,10 +219,13 @@ $$('.motion-open').forEach(button=>button.addEventListener('click',()=>{
   const video=document.createElement('video');
   video.src=inline.currentSrc||inline.dataset.src||inline.src;
   video.poster=inline.poster;
-  video.controls=true;video.playsInline=true;video.loop=true;video.preload='metadata';
+  video.controls=false;video.playsInline=true;video.loop=true;video.preload='metadata';video.muted=true;video.dataset.silent='true';
   const title=$('h3',item).textContent;
   video.setAttribute('aria-label',title);
-  openDialog(title,video,`${item.dataset.motionSource} · ${language==='zh'?'ONE-G 仿真':'ONE-G simulation'}`,button);
+  const environment=item.dataset.motionEnvironment==='physics'
+    ? (language==='zh'?'ONE-G 真实物理仿真':'ONE-G physics simulation')
+    : (language==='zh'?'ONE-G 仿真':'ONE-G simulation');
+  openDialog(title,video,`${item.dataset.motionSource} · ${environment}`,button);
   video.play().catch(()=>{});
 }));
 $$('[data-route]').forEach(button=>button.addEventListener('click',()=>{setMethod(button.dataset.route);$('#technology').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}));
@@ -246,43 +249,67 @@ function videoTime(seconds) {
   const time=Number.isFinite(seconds)?Math.max(0,Math.floor(seconds)):0;
   return `${Math.floor(time/60)}:${String(time%60).padStart(2,'0')}`;
 }
-function updateTeleopControls() {
-  const paused=teleopVideo.paused;
-  const duration=Number.isFinite(teleopVideo.duration)?teleopVideo.duration:0;
-  const current=teleopVideo.currentTime||0;
-  $('#teleop-play').dataset.paused=paused;
-  $('#teleop-play').setAttribute('aria-label',language==='zh'?(paused?'播放视频':'暂停视频'):(paused?'Play video':'Pause video'));
-  const seek=$('#teleop-seek');
-  seek.disabled=duration===0;
-  seek.max=duration;
-  seek.value=current;
-  seek.setAttribute('aria-label',language==='zh'?'播放进度':'Playback position');
-  seek.setAttribute('aria-valuetext',`${videoTime(current)} / ${videoTime(duration)}`);
-  $('#teleop-time').textContent=`${videoTime(current)} / ${videoTime(duration)}`;
-  const mute=$('#teleop-mute');
-  mute.hidden=mode!=='full';
-  mute.dataset.muted=teleopVideo.muted;
-  mute.setAttribute('aria-label',language==='zh'?(teleopVideo.muted?'开启声音':'静音'):(teleopVideo.muted?'Unmute':'Mute'));
-  const fullscreen=$('#teleop-fullscreen');
-  fullscreen.hidden=!teleopPlayer.requestFullscreen;
-  fullscreen.setAttribute('aria-label',language==='zh'?(document.fullscreenElement===teleopPlayer?'退出全屏':'全屏播放'):(document.fullscreenElement===teleopPlayer?'Exit fullscreen':'Enter fullscreen'));
-  $('.video-controls',teleopPlayer).setAttribute('aria-label',language==='zh'?'视频播放控制':'Video playback controls');
+function setupVideoPlayer(player, hasAudio = () => true) {
+  const video=$('video',player);
+  const play=$('.player-toggle',player);
+  const seek=$('.player-seek',player);
+  const time=$('.player-time',player);
+  const mute=$('.player-mute',player);
+  const fullscreen=$('.player-fullscreen',player);
+  video.controls=false;
+  function update() {
+    const paused=video.paused;
+    const duration=Number.isFinite(video.duration)?video.duration:0;
+    const current=video.currentTime||0;
+    play.dataset.paused=paused;
+    play.setAttribute('aria-label',language==='zh'?(paused?'播放视频':'暂停视频'):(paused?'Play video':'Pause video'));
+    seek.disabled=duration===0;
+    seek.max=duration;
+    seek.value=current;
+    seek.setAttribute('aria-label',language==='zh'?'播放进度':'Playback position');
+    seek.setAttribute('aria-valuetext',`${videoTime(current)} / ${videoTime(duration)}`);
+    time.textContent=`${videoTime(current)} / ${videoTime(duration)}`;
+    mute.hidden=!hasAudio();
+    mute.dataset.muted=video.muted;
+    mute.setAttribute('aria-label',language==='zh'?(video.muted?'开启声音':'静音'):(video.muted?'Unmute':'Mute'));
+    fullscreen.hidden=!document.fullscreenEnabled||!player.requestFullscreen;
+    fullscreen.setAttribute('aria-label',language==='zh'?(document.fullscreenElement===player?'退出全屏':'全屏播放'):(document.fullscreenElement===player?'Exit fullscreen':'Enter fullscreen'));
+    $('.video-controls',player).setAttribute('aria-label',language==='zh'?'视频播放控制':'Video playback controls');
+  }
+  function toggle() {
+    if(video.paused){loadVideo(video);video.play().catch(()=>{});}else video.pause();
+  }
+  play.addEventListener('click',toggle);
+  video.addEventListener('click',toggle);
+  seek.addEventListener('input',event=>{
+    if(Number.isFinite(video.duration)){video.currentTime=Number(event.target.value);update();}
+  });
+  mute.addEventListener('click',()=>{video.muted=!video.muted;});
+  fullscreen.addEventListener('click',()=>{
+    const action=document.fullscreenElement===player?document.exitFullscreen():player.requestFullscreen();
+    action?.catch(()=>{});
+  });
+  ['play','pause','timeupdate','loadedmetadata','durationchange','emptied','ended','volumechange'].forEach(event=>video.addEventListener(event,update));
+  player.addEventListener('fullscreenchange',update);
+  update();
+  return update;
 }
-function toggleTeleopPlayback() {
-  if(teleopVideo.paused){loadVideo(teleopVideo);teleopVideo.play().catch(()=>{});}else teleopVideo.pause();
+function createVideoPlayer(video) {
+  const player=document.createElement('div');
+  player.className='video-player modal-player';
+  player.id='dialog-player';
+  const media=document.createElement('div');
+  media.className='player-media';
+  video.id='dialog-video';
+  media.append(video);
+  const controls=$('#teleop-player .video-controls').cloneNode(true);
+  $$('[id]',controls).forEach(element=>element.removeAttribute('id'));
+  $$('[aria-controls]',controls).forEach(element=>element.setAttribute('aria-controls',element.classList.contains('player-fullscreen')?player.id:video.id));
+  player.append(media,controls);
+  setupVideoPlayer(player,()=>video.dataset.silent!=='true');
+  return player;
 }
-$('#teleop-play').addEventListener('click',toggleTeleopPlayback);
-teleopVideo.addEventListener('click',toggleTeleopPlayback);
-$('#teleop-seek').addEventListener('input',event=>{
-  if(Number.isFinite(teleopVideo.duration)){teleopVideo.currentTime=Number(event.target.value);updateTeleopControls();}
-});
-$('#teleop-mute').addEventListener('click',()=>{teleopVideo.muted=!teleopVideo.muted;});
-$('#teleop-fullscreen').addEventListener('click',()=>{
-  const action=document.fullscreenElement===teleopPlayer?document.exitFullscreen():teleopPlayer.requestFullscreen();
-  action?.catch(()=>{});
-});
-['play','pause','timeupdate','loadedmetadata','durationchange','emptied','ended','volumechange'].forEach(event=>teleopVideo.addEventListener(event,updateTeleopControls));
-document.addEventListener('fullscreenchange',updateTeleopControls);
+const updateTeleopControls=setupVideoPlayer(teleopPlayer,()=>mode==='full');
 let heroUserPaused=false;
 function updateHeroButton(){const paused=hero.paused;$('#hero-pause use').setAttribute('href',paused?'#icon-play':'#icon-pause');$('#hero-pause').setAttribute('aria-label',language==='zh'?(paused?'播放首屏视频':'暂停首屏视频'):(paused?'Play hero video':'Pause hero video'));}
 $('#hero-pause').addEventListener('click',()=>{if(hero.paused){heroUserPaused=false;hero.play().catch(()=>{});}else{heroUserPaused=true;hero.pause();}});

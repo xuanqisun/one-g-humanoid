@@ -529,14 +529,20 @@ button[hidden],[hidden] {
   align-self:center;
   background:#fff;
 }
+.video-player {
+  position:relative;
+  isolation:isolate;
+}
 .video-controls {
+  position:absolute;
+  z-index:1;
+  inset:auto 0 0;
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:10px 14px;
-  background:#fff;
-  border-top:1px solid #ececef;
-  color:#53535c;
+  gap:14px;
+  padding:32px 18px 12px;
+  background:linear-gradient(180deg,rgba(241,241,245,0),rgba(237,237,242,.38) 42%,rgba(232,232,239,.88));
+  color:#666670;
 }
 .video-controls button {
   display:grid;
@@ -547,7 +553,8 @@ button[hidden],[hidden] {
   border-radius:50%;
 }
 .video-controls button:hover {
-  background:var(--soft);
+  background:#ffffff75;
+  color:var(--ink);
 }
 .video-controls svg {
   width:18px;
@@ -560,11 +567,11 @@ button[hidden],[hidden] {
 }
 .player-toggle[data-paused="true"] .pause-icon,
 .player-toggle[data-paused="false"] .play-icon,
-#teleop-mute[data-muted="true"] .sound-waves,
-#teleop-mute[data-muted="false"] .sound-off {
+.player-mute[data-muted="true"] .sound-waves,
+.player-mute[data-muted="false"] .sound-off {
   display:none;
 }
-#teleop-seek {
+.player-seek {
   appearance:none;
   flex:1;
   min-width:24px;
@@ -573,32 +580,32 @@ button[hidden],[hidden] {
   background:transparent;
   cursor:pointer;
 }
-#teleop-seek::-webkit-slider-runnable-track {
-  height:3px;
-  background:#dedee3;
-  border-radius:3px;
+.player-seek::-webkit-slider-runnable-track {
+  height:2px;
+  background:#9a9aa54d;
+  border-radius:2px;
 }
-#teleop-seek::-webkit-slider-thumb {
+.player-seek::-webkit-slider-thumb {
   appearance:none;
-  width:10px;
-  height:10px;
-  margin-top:-3.5px;
+  width:8px;
+  height:8px;
+  margin-top:-3px;
   border-radius:50%;
-  background:var(--blue);
+  background:#777782;
 }
-#teleop-seek::-moz-range-track {
-  height:3px;
-  background:#dedee3;
-  border-radius:3px;
+.player-seek::-moz-range-track {
+  height:2px;
+  background:#9a9aa54d;
+  border-radius:2px;
 }
-#teleop-seek::-moz-range-thumb {
-  width:10px;
-  height:10px;
+.player-seek::-moz-range-thumb {
+  width:8px;
+  height:8px;
   border:0;
   border-radius:50%;
-  background:var(--blue);
+  background:#777782;
 }
-#teleop-seek:focus-visible {
+.player-seek:focus-visible {
   outline:2px solid var(--blue);
   outline-offset:3px;
 }
@@ -607,22 +614,6 @@ button[hidden],[hidden] {
   font-size:11px;
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
-}
-.teleop-player:fullscreen {
-  display:flex;
-  flex-direction:column;
-  background:#fff;
-}
-.teleop-panel .teleop-player:fullscreen .teleop-media {
-  flex:1;
-  height:auto;
-  min-height:0;
-  width:100%;
-  aspect-ratio:auto;
-  background:#fff;
-}
-.teleop-player:fullscreen .video-controls {
-  flex:none;
 }
 .section-note {
   display:flex;
@@ -847,6 +838,32 @@ button[hidden],[hidden] {
   font-size:20px;
   font-weight:550;
   letter-spacing:-.035em;
+}
+.motion-robot-group {
+  margin-top:28px;
+}
+.motion-robot-group+.motion-robot-group {
+  margin-top:36px;
+  padding-top:28px;
+  border-top:1px solid #ececef;
+}
+.motion-robot-heading {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.motion-robot-heading h3 {
+  font-size:17px;
+  font-weight:550;
+}
+.motion-robot-heading p {
+  padding-left:12px;
+  border-left:1px solid var(--line);
+  font-size:12px;
+  color:var(--muted);
+}
+.motion-footer.motion-method-footer {
+  justify-content:flex-end;
 }
 .motion-playback {
   display:inline-flex;
@@ -1393,14 +1410,56 @@ dialog::backdrop {
   width:auto;
   margin:auto;
 }
-#dialog-content video {
-  max-height:66vh;
-  min-height:230px;
+.modal-player {
+  width:min(1000px,calc(100vw - 88px));
   max-width:100%;
-  width:auto;
+  overflow:hidden;
+  border-radius:12px;
+  background:#fff;
+}
+.modal-player .player-media {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+}
+#dialog-content video {
+  max-height:60vh;
+  max-height:60dvh;
+  max-width:100%;
+  width:100%;
+  height:auto;
+  object-fit:contain;
   margin:auto;
-  border-radius:10px;
-  background:#111;
+  background:#fff;
+}
+.video-player:fullscreen {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+  max-width:none;
+  border-radius:0;
+  background:#fff;
+}
+.video-player:fullscreen .player-media,
+.teleop-panel .video-player:fullscreen .player-media {
+  flex:1;
+  height:auto;
+  min-height:0;
+  width:100%;
+  aspect-ratio:auto;
+  background:#fff;
+}
+.video-player:fullscreen video,
+#dialog-content .video-player:fullscreen video {
+  width:100%;
+  height:100%;
+  max-height:none;
+  object-fit:contain;
+}
+.video-player:fullscreen .video-controls {
+  flex:none;
 }
 #dialog-caption {
   font-size:11px;
@@ -1580,7 +1639,7 @@ dialog::backdrop {
   }
   .video-controls {
     gap:8px;
-    padding:8px 10px;
+    padding:26px 10px 8px;
   }
   .capability-index {
     padding-top:64px;
@@ -1950,6 +2009,9 @@ dialog::backdrop {
     padding:17px;
     border-radius:18px;
     max-width:calc(100vw - 24px);
+  }
+  .modal-player {
+    width:calc(100vw - 58px);
   }
   .dialog-top {
     gap:20px;

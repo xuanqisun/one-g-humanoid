@@ -11,8 +11,8 @@
   <meta property="og:image" content="https://xuanqisun.github.io/one-g-humanoid/assets/images/pick-poster.jpg">
   <title>ONE-G · 人形机器人运动控制</title>
   <link rel="icon" type="image/svg+xml" href="assets/brand/one-g-symbol.svg">
-  <link rel="stylesheet" href="styles.css?v=20261111-design">
-  <script src="script.js?v=20261111-design" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261111-x2-light">
+  <script src="script.js?v=20261111-x2-light" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -95,14 +95,14 @@
         </div>
         <div class="teleop-panel" id="teleop-panel" role="tabpanel" aria-labelledby="mode-three">
           <div class="teleop-copy"><span class="pill" data-en="G1 · REAL ROBOT">G1 · 真机</span><h3 id="mode-title">手柄与手部追踪</h3><p id="mode-description">头显与双手追踪控制上身姿态，导航输入控制移动。支持手柄和手部追踪两种交互方式。</p><dl class="mode-facts"><div><dt data-en="INPUT">输入</dt><dd id="mode-input">头显 + 手柄 / 手部追踪</dd></div><div><dt data-en="CONTROL">控制</dt><dd id="mode-effect">上身姿态与移动</dd></div></dl><button class="text-link route-link" data-route="sonic"><span data-en="SONIC method">SONIC 技术路线</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></div>
-          <div class="teleop-player" id="teleop-player">
-            <div class="teleop-media"><video id="teleop-video" data-src="assets/videos/dual-mode-real.mp4" poster="assets/images/dual-mode-real.jpg" muted loop playsinline preload="none" aria-label="ONE-G 三点遥操演示"></video></div>
+          <div class="video-player teleop-player" id="teleop-player">
+            <div class="player-media teleop-media"><video id="teleop-video" data-src="assets/videos/dual-mode-real.mp4" poster="assets/images/dual-mode-real.jpg" muted loop playsinline preload="none" aria-label="ONE-G 三点遥操演示"></video></div>
             <div class="video-controls" role="group" aria-label="视频播放控制">
               <button class="player-toggle" id="teleop-play" type="button" data-paused="true" aria-label="播放视频" aria-controls="teleop-video"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="play-icon" d="m9 5 11 7-11 7Z"/><path class="pause-icon" d="M8 5v14M16 5v14"/></svg></button>
-              <input id="teleop-seek" type="range" min="0" max="0" value="0" step="0.1" disabled aria-label="播放进度" aria-controls="teleop-video">
+              <input class="player-seek" id="teleop-seek" type="range" min="0" max="0" value="0" step="0.1" disabled aria-label="播放进度" aria-controls="teleop-video">
               <span class="player-time" id="teleop-time">0:00 / 0:00</span>
-              <button id="teleop-mute" type="button" aria-label="开启声音" aria-controls="teleop-video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-5 4H3v6h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-off" d="m16 9 6 6m-6 0 6-6"/></svg></button>
-              <button id="teleop-fullscreen" type="button" aria-label="全屏播放" aria-controls="teleop-player" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
+              <button class="player-mute" id="teleop-mute" type="button" aria-label="开启声音" aria-controls="teleop-video" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-5 4H3v6h3l5 4Z"/><path class="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="sound-off" d="m16 9 6 6m-6 0 6-6"/></svg></button>
+              <button class="player-fullscreen" id="teleop-fullscreen" type="button" aria-label="全屏播放" aria-controls="teleop-player" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
             </div>
           </div>
         </div>
@@ -121,6 +121,35 @@
             <button class="motion-playback" type="button" aria-label="暂停这组演示"><svg class="icon motion-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-pause"/></svg><span class="motion-control-label">暂停</span></button>
           </div>
           <div id="transfer-morph-panel" class="motion-panel" role="tabpanel" aria-labelledby="transfer-morph">
+            <div class="motion-robot-group" aria-labelledby="morph-x2-heading">
+              <div class="motion-robot-heading"><h3 id="morph-x2-heading">X2</h3><p data-en="ONE-G physics simulation">ONE-G 真实物理仿真</p></div>
+              <div class="motion-stage">
+                <figure class="motion-item" data-motion-source="MorphMimic · X2" data-motion-environment="physics">
+                  <button class="motion-open" type="button" aria-label="放大播放：踢步组合">
+                    <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-x2-kick.mp4" poster="assets/images/motion/morph-x2-kick.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+                    <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
+                  </button>
+                  <figcaption><h3 data-en="Kick-step sequence">踢步组合</h3></figcaption>
+                </figure>
+                <figure class="motion-item" data-motion-source="MorphMimic · X2" data-motion-environment="physics">
+                  <button class="motion-open" type="button" aria-label="放大播放：转身舞步">
+                    <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-x2-turn.mp4" poster="assets/images/motion/morph-x2-turn.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+                    <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
+                  </button>
+                  <figcaption><h3 data-en="Turning dance">转身舞步</h3></figcaption>
+                </figure>
+                <figure class="motion-item" data-motion-source="MorphMimic · X2" data-motion-environment="physics">
+                  <button class="motion-open" type="button" aria-label="放大播放：全身舞蹈">
+                    <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-x2-dance.mp4" poster="assets/images/motion/morph-x2-dance.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+                    <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
+                  </button>
+                  <figcaption><h3 data-en="Full-body dance">全身舞蹈</h3></figcaption>
+                </figure>
+              </div>
+
+            </div>
+            <div class="motion-robot-group" aria-labelledby="morph-h2-heading">
+              <div class="motion-robot-heading"><h3 id="morph-h2-heading">H2</h3><p data-en="ONE-G simulation">ONE-G 仿真</p></div>
             <div class="motion-stage">
 <figure class="motion-item" data-motion-source="MorphMimic · H2">
           <button class="motion-open" type="button" aria-label="放大播放：嘻哈组合舞步">
@@ -144,7 +173,9 @@
           <figcaption><h3 data-en="Shadow boxing">空击拳</h3></figcaption>
         </figure>
 </div>
-            <div class="motion-footer"><p><span>H2</span><span data-en="ONE-G simulation">ONE-G 仿真</span></p><button class="text-link route-link" data-route="morphmimic"><span data-en="MorphMimic method">MorphMimic 技术路线</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></div>
+
+            </div>
+            <div class="motion-footer motion-method-footer"><button class="text-link route-link" data-route="morphmimic"><span data-en="MorphMimic method">MorphMimic 技术路线</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></div>
           </div>
           <div id="transfer-sonic-panel" class="motion-panel" role="tabpanel" aria-labelledby="transfer-sonic" hidden>
             <div class="motion-stage">
