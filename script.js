@@ -80,6 +80,18 @@ const demos = [
   {video:'dual-mode-real.mp4',poster:'dual-mode-real.jpg',kind:'real',portrait:true,title:{zh:'三点遥操',en:'Three-point control'},detail:{zh:'G1 · 手柄 / 手部追踪 · 140 秒',en:'G1 · Controllers / hand tracking · 140 s'}}
 ];
 
+function createIcon(name) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'icon');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', `#icon-${name}`);
+  svg.append(use);
+  return svg;
+}
+
 function loadVideo(video) {
   if (video.dataset.src) {video.src = video.dataset.src; delete video.dataset.src; video.load();}
 }
@@ -130,7 +142,7 @@ function renderDemos() {
     const article=document.createElement('article');article.className='demo-card';
     const button=document.createElement('button');button.className=`demo-thumb${demo.portrait?' portrait':''}`;button.type='button';button.setAttribute('aria-label',`${language==='zh'?'播放':'Play'} ${text(demo.title)}`);
     const img=document.createElement('img');img.src=`assets/images/${demo.poster}`;img.alt='';img.loading='lazy';img.width=640;img.height=400;
-    const play=document.createElement('span');play.className='demo-play';play.textContent='▶';play.setAttribute('aria-hidden','true');
+    const play=document.createElement('span');play.className='demo-play';play.append(createIcon('play'));play.setAttribute('aria-hidden','true');
     const status=document.createElement('span');status.className='demo-status';status.textContent=demo.kind==='real'?(language==='zh'?'真机':'REAL ROBOT'):(language==='zh'?'仿真':'SIMULATION');
     button.append(img,play,status);
     const heading=document.createElement('h3');heading.textContent=text(demo.title);
@@ -146,7 +158,7 @@ function applyLanguage() {
   translations.forEach(({element,zh,en})=>element.innerHTML=language==='en'?en:zh);
   document.documentElement.lang=language==='zh'?'zh-CN':'en';
   document.title=language==='zh'?'ONE-G · 人形机器人运动控制':'ONE-G · Humanoid motion & control';
-  $('#language-toggle').innerHTML=language==='zh'?'EN <span aria-hidden="true">↗</span>':'中文 <span aria-hidden="true">↗</span>';
+  $('#language-toggle .language-label').textContent=language==='zh'?'EN':'中文';
   $('#language-toggle').setAttribute('aria-label',language==='zh'?'Switch to English':'切换为中文');
   $('#hero-video').setAttribute('aria-label',language==='zh'?'ONE-G G1 全身遥操：俯身抓取':'ONE-G G1 whole-body teleoperation: bend and grasp');
   setMode(mode,false);setMethod(method);renderDemos();updateHeroButton();
@@ -171,7 +183,7 @@ $('#media-dialog').addEventListener('close',()=>{$$('video',$('#dialog-content')
 
 const hero=$('#hero-video');
 let heroUserPaused=false;
-function updateHeroButton(){const paused=hero.paused;$('#hero-pause').firstElementChild.textContent=paused?'▶':'Ⅱ';$('#hero-pause').setAttribute('aria-label',language==='zh'?(paused?'播放首屏视频':'暂停首屏视频'):(paused?'Play hero video':'Pause hero video'));}
+function updateHeroButton(){const paused=hero.paused;$('#hero-pause use').setAttribute('href',paused?'#icon-play':'#icon-pause');$('#hero-pause').setAttribute('aria-label',language==='zh'?(paused?'播放首屏视频':'暂停首屏视频'):(paused?'Play hero video':'Pause hero video'));}
 $('#hero-pause').addEventListener('click',()=>{if(hero.paused){heroUserPaused=false;hero.play().catch(()=>{});}else{heroUserPaused=true;hero.pause();}});
 hero.addEventListener('play',updateHeroButton);hero.addEventListener('pause',updateHeroButton);
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
