@@ -83,6 +83,18 @@ const demos = [
   {video:'x2-morphmimic.mp4',poster:'x2-morphmimic.jpg',kind:'simulation',title:{zh:'X2 动作跟踪',en:'X2 motion tracking'},detail:{zh:'X2 · MorphMimic',en:'X2 · MorphMimic'}}
 ];
 
+function createIcon(name) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'icon');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', `#icon-${name}`);
+  svg.append(use);
+  return svg;
+}
+
 function loadVideo(video) {
   if (video.dataset.src) {video.src = video.dataset.src; delete video.dataset.src; video.load();}
 }
@@ -91,6 +103,7 @@ function updateMotionControls() {
     const paused=motionStates.get(gallery.id)?.paused ?? true;
     const button=$('.motion-playback',gallery);
     button.dataset.paused=paused;
+    $('.motion-control-icon use',button).setAttribute('href',paused?'#icon-play':'#icon-pause');
     button.setAttribute('aria-label',language==='zh'?(paused?'播放这组演示':'暂停这组演示'):(paused?'Play these demonstrations':'Pause these demonstrations'));
     $('.motion-control-label',button).textContent=language==='zh'?(paused?'播放':'暂停'):(paused?'Play':'Pause');
     $$('.motion-item',gallery).forEach(item=>$('.motion-open',item).setAttribute('aria-label',`${language==='zh'?'放大播放':'Play enlarged'}: ${$('h3',item).textContent}`));
@@ -132,6 +145,7 @@ function setMode(next, changeMedia = true) {
   const video = $('#teleop-video');
   video.setAttribute('aria-label', text(data.title).replace(/<br>/g,' '));
   if (changeMedia) {video.pause();video.poster = `assets/images/${data.poster}`;video.src = `assets/videos/${data.video}`;delete video.dataset.src;video.load();}
+  updateTeleopControls();
 }
 function setMethod(next) {
   method = next;
@@ -166,7 +180,7 @@ function renderDemos() {
     const article=document.createElement('article');article.className='demo-card';
     const button=document.createElement('button');button.className=`demo-thumb${demo.portrait?' portrait':''}`;button.type='button';button.setAttribute('aria-label',`${language==='zh'?'播放':'Play'} ${text(demo.title)}`);
     const img=document.createElement('img');img.src=`assets/images/${demo.poster}`;img.alt='';img.loading='lazy';img.width=640;img.height=400;
-    const play=document.createElement('span');play.className='demo-play';play.textContent='▶';play.setAttribute('aria-hidden','true');
+    const play=document.createElement('span');play.className='demo-play';play.append(createIcon('play'));play.setAttribute('aria-hidden','true');
     const status=document.createElement('span');status.className='demo-status';status.textContent=demo.kind==='real'?(language==='zh'?'真机':'REAL ROBOT'):(language==='zh'?'仿真':'SIMULATION');
     button.append(img,play,status);
     const heading=document.createElement('h3');heading.textContent=text(demo.title);
@@ -182,7 +196,7 @@ function applyLanguage() {
   translations.forEach(({element,zh,en})=>element.innerHTML=language==='en'?en:zh);
   document.documentElement.lang=language==='zh'?'zh-CN':'en';
   document.title=language==='zh'?'ONE-G · 人形机器人运动控制':'ONE-G · Humanoid motion & control';
-  $('#language-toggle').innerHTML=language==='zh'?'EN <span aria-hidden="true">↗</span>':'中文 <span aria-hidden="true">↗</span>';
+  $('#language-toggle .language-label').textContent=language==='zh'?'EN':'中文';
   $('#language-toggle').setAttribute('aria-label',language==='zh'?'Switch to English':'切换为中文');
   $('#hero-video').setAttribute('aria-label',language==='zh'?'ONE-G G1 全身遥操：俯身抓取':'ONE-G G1 whole-body teleoperation: bend and grasp');
   setMode(mode,false);setMethod(method);renderDemos();updateHeroButton();updateMotionControls();
@@ -226,8 +240,51 @@ $('#media-dialog').addEventListener('click',event=>{if(event.target===event.curr
 $('#media-dialog').addEventListener('close',()=>{$$('video',$('#dialog-content')).forEach(video=>{video.pause();video.removeAttribute('src');video.load();});$('#dialog-content').replaceChildren();lastDialogTrigger?.focus();syncMotionPlayback();});
 
 const hero=$('#hero-video');
+const teleopVideo=$('#teleop-video');
+const teleopPlayer=$('#teleop-player');
+function videoTime(seconds) {
+  const time=Number.isFinite(seconds)?Math.max(0,Math.floor(seconds)):0;
+  return `${Math.floor(time/60)}:${String(time%60).padStart(2,'0')}`;
+}
+function updateTeleopControls() {
+  const paused=teleopVideo.paused;
+  const duration=Number.isFinite(teleopVideo.duration)?teleopVideo.duration:0;
+  const current=teleopVideo.currentTime||0;
+  $('#teleop-play').dataset.paused=paused;
+  $('#teleop-play').setAttribute('aria-label',language==='zh'?(paused?'播放视频':'暂停视频'):(paused?'Play video':'Pause video'));
+  const seek=$('#teleop-seek');
+  seek.disabled=duration===0;
+  seek.max=duration;
+  seek.value=current;
+  seek.setAttribute('aria-label',language==='zh'?'播放进度':'Playback position');
+  seek.setAttribute('aria-valuetext',`${videoTime(current)} / ${videoTime(duration)}`);
+  $('#teleop-time').textContent=`${videoTime(current)} / ${videoTime(duration)}`;
+  const mute=$('#teleop-mute');
+  mute.hidden=mode!=='full';
+  mute.dataset.muted=teleopVideo.muted;
+  mute.setAttribute('aria-label',language==='zh'?(teleopVideo.muted?'开启声音':'静音'):(teleopVideo.muted?'Unmute':'Mute'));
+  const fullscreen=$('#teleop-fullscreen');
+  fullscreen.hidden=!teleopPlayer.requestFullscreen;
+  fullscreen.setAttribute('aria-label',language==='zh'?(document.fullscreenElement===teleopPlayer?'退出全屏':'全屏播放'):(document.fullscreenElement===teleopPlayer?'Exit fullscreen':'Enter fullscreen'));
+  $('.video-controls',teleopPlayer).setAttribute('aria-label',language==='zh'?'视频播放控制':'Video playback controls');
+}
+function toggleTeleopPlayback() {
+  if(teleopVideo.paused){loadVideo(teleopVideo);teleopVideo.play().catch(()=>{});}else teleopVideo.pause();
+}
+$('#teleop-play').addEventListener('click',toggleTeleopPlayback);
+teleopVideo.addEventListener('click',toggleTeleopPlayback);
+$('#teleop-seek').addEventListener('input',event=>{
+  if(Number.isFinite(teleopVideo.duration)){teleopVideo.currentTime=Number(event.target.value);updateTeleopControls();}
+});
+$('#teleop-mute').addEventListener('click',()=>{teleopVideo.muted=!teleopVideo.muted;});
+$('#teleop-fullscreen').addEventListener('click',()=>{
+  const action=document.fullscreenElement===teleopPlayer?document.exitFullscreen():teleopPlayer.requestFullscreen();
+  action?.catch(()=>{});
+});
+['play','pause','timeupdate','loadedmetadata','durationchange','emptied','ended','volumechange'].forEach(event=>teleopVideo.addEventListener(event,updateTeleopControls));
+document.addEventListener('fullscreenchange',updateTeleopControls);
 let heroUserPaused=false;
-function updateHeroButton(){const paused=hero.paused;$('#hero-pause').firstElementChild.textContent=paused?'▶':'Ⅱ';$('#hero-pause').setAttribute('aria-label',language==='zh'?(paused?'播放首屏视频':'暂停首屏视频'):(paused?'Play hero video':'Pause hero video'));}
+function updateHeroButton(){const paused=hero.paused;$('#hero-pause use').setAttribute('href',paused?'#icon-play':'#icon-pause');$('#hero-pause').setAttribute('aria-label',language==='zh'?(paused?'播放首屏视频':'暂停首屏视频'):(paused?'Play hero video':'Pause hero video'));}
 $('#hero-pause').addEventListener('click',()=>{if(hero.paused){heroUserPaused=false;hero.play().catch(()=>{});}else{heroUserPaused=true;hero.pause();}});
 hero.addEventListener('play',updateHeroButton);hero.addEventListener('pause',updateHeroButton);
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
