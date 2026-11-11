@@ -1,6 +1,6 @@
 # Sources and evidence
 
-Checked 2026-11-10. Company identity: **ONE-G**.
+Checked 2026-11-11. Company identity: **ONE-G**.
 
 ## Visual reference
 
@@ -30,7 +30,7 @@ Checked 2026-11-10. Company identity: **ONE-G**.
 - Example official transfer code: https://github.com/Ming827/any2any_sonic2Oli
 - Figure: https://any2any.top/assets/figures/figure2-architecture.png?v=method-crop-20260617
 - Local: `assets/papers/any2any-architecture.png`
-- Original architecture figure. Approximately 1% data/compute is a result of specific transfer experiments, not a universal guarantee. The H2/X2 clips are not evidence of Any2Any experiments.
+- Original architecture figure. Approximately 1% data/compute is a result of specific transfer experiments, not a universal guarantee. The original H2/X2 MorphMimic clips are not Any2Any results. The new `sonic_h2` clips are identified by the user as the Any2Any × SONIC route; this is a supplied demonstration label, not an independently reproduced benchmark.
 
 ### MorphMimic
 
@@ -51,7 +51,7 @@ Checked 2026-11-10. Company identity: **ONE-G**.
 - Local figure: `assets/papers/supermimic-training-loop.png`
 - Attribution: Liao et al., 2026, Figure 2 on page 4. Extracted from the original PDF; crop removes surrounding text, retaining the complete figure. No redrawing or relabeling.
 - Paper: 1 H100, 3 hours to exceed the released SONIC checkpoint's normalized return; 2 H100s, 9.8 hours for zero failures on 129,514 benchmark motions. The benchmark includes training motions and measures motion coverage, not unseen-task generalization. Hardware and dataset differ from SONIC's original training.
-- No ONE-G SuperMimic training run is claimed.
+- The new G1 clips are user-supplied ONE-G SuperMimic demonstrations. No ONE-G training-time or GPU benchmark is claimed; the compute cards remain author-reported paper results.
 
 ## Figure rights
 
@@ -64,3 +64,17 @@ Existing clips: `https://github.com/xuanqisun/g1-humanoid-teleoperation`, source
 User-supplied clips: `H2_morphmimic.mp4`, `X2_morphmimic.mp4`, `双模式三点遥操真机.mp4`.
 
 The site distinguishes real hardware and simulation. Reported durations are rounded from ffprobe. Paper training measurements are labeled as paper results. No company benchmark numbers are invented.
+
+### White-background motion demonstrations · 2026-11-11
+
+Supplied by the user's colleague in the `九个独立Demo_v4_S2_M1_白底1080p50fps/videos` collection. The user approved separating H2 transfer demonstrations from G1 efficient-learning demonstrations.
+
+| Source folder | Web assets | Display names |
+| --- | --- | --- |
+| `morphmimic_h2` | `motion/morph-hiphop.mp4`, `motion/morph-latin.mp4`, `motion/morph-boxing.mp4` | 嘻哈组合舞步、拉丁连续踢步、空击拳 |
+| `sonic_h2` | `motion/sonic-turn.mp4`, `motion/sonic-jump.mp4`, `motion/sonic-salsa.mp4` | 交叉步转身、蓄力高跳、Salsa 四向舞步 |
+| `supermimic_g1` | `motion/super-backflip.mp4`, `motion/super-cartwheel.mp4`, `motion/super-frontflip.mp4` | 后空翻、侧手翻、前空翻 |
+
+Names follow the burned-in source captions. The original `flip_180` filename is displayed as 前空翻, matching its caption. The `sonic_h2` group is labeled Any2Any × SONIC according to the user's description. The new demonstration groups do not establish that the robots share identical checkpoints, training budgets or motion datasets.
+
+Processing: center crop `1200:1080:360:0` from 1920 × 1080, preserving 50 fps. G1 backflip uses the first 7 seconds as requested; the other eight clips retain their complete duration. H.264/yuv420p, CRF 18, faststart; no speed changes. Crop removes white side margins and burned-in titles; frame checks preserve robot and main contact shadow. Web labels replace the removed captions. Original files remain unchanged.
