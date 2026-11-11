@@ -69,24 +69,28 @@ The site distinguishes real hardware and simulation. Reported durations are roun
 
 Supplied by the user's colleague in the `九个独立Demo_v4_S2_M1_白底1080p50fps/videos` collection. The user approved separating H2 transfer demonstrations from G1 efficient-learning demonstrations.
 
-| Source folder | Web assets | Display names |
+| Source folder | Web assets | Source descriptions |
 | --- | --- | --- |
 | `morphmimic_h2` | `motion/morph-hiphop.mp4`, `motion/morph-latin.mp4`, `motion/morph-boxing.mp4` | 嘻哈组合舞步、拉丁连续踢步、空击拳 |
 | `sonic_h2` | `motion/sonic-turn.mp4`, `motion/sonic-jump.mp4`, `motion/sonic-salsa.mp4` | 交叉步转身、蓄力高跳、Salsa 四向舞步 |
 | `supermimic_g1` | `motion/super-backflip.mp4`, `motion/super-cartwheel.mp4`, `motion/super-frontflip.mp4` | 后空翻、侧手翻、前空翻 |
 
-Names follow the burned-in source captions. The original `flip_180` filename is displayed as 前空翻, matching its caption. The `sonic_h2` group is labeled Any2Any × SONIC according to the user's description. The new demonstration groups do not establish that the robots share identical checkpoints, training budgets or motion datasets.
+Descriptions follow the burned-in source captions. The original `flip_180` filename is displayed as 前空翻, matching its caption. The `sonic_h2` group is labeled Any2Any × SONIC according to the user's description. The new demonstration groups do not establish that the robots share identical checkpoints, training budgets or motion datasets.
 
-Processing: center crop `1200:1080:360:0` from 1920 × 1080, preserving 50 fps. G1 backflip uses the first 7 seconds as requested; the other eight clips retain their complete duration. H.264/yuv420p, CRF 18, faststart; no speed changes. Crop removes white side margins and burned-in titles; frame checks preserve robot and main contact shadow. Web labels replace the removed captions. Original files remain unchanged.
+Processing: center crop `1200:1080:360:0` from 1920 × 1080, preserving 50 fps. G1 backflip uses the first 7 seconds as requested; the other eight clips retain their complete duration. H.264/yuv420p, CRF 18, faststart; no speed changes. Crop removes white side margins and burned-in titles; frame checks preserve robot and main contact shadow. Motion-learning web labels replace the removed captions; cross-embodiment galleries omit individual motion titles. Original files remain unchanged.
 
 ### X2 physics simulation · 2026-11-11
 
 The user supplied three clips from `白底X2素材` and identified them as ONE-G X2 physics simulations trained with MorphMimic. They appear under MorphMimic in Cross-embodiment transfer, in two visible rows, X2 first and H2 second. The displayed environment is `X2 · ONE-G 真实物理仿真` (`X2 · ONE-G physics simulation` in English).
 
-| Source | Web asset | Display name | Duration |
+| Source | Web asset | Source description | Duration |
 | --- | --- | --- | --- |
 | `01_kick_steps.mp4` | `motion/morph-x2-kick.mp4` | 踢步组合 / Kick-step sequence | 6.20 s |
 | `02_turning_dance.mp4` | `motion/morph-x2-turn.mp4` | 转身舞步 / Turning dance | 6.36 s |
 | `03_full_body_dance.mp4` | `motion/morph-x2-dance.mp4` | 全身舞蹈 / Full-body dance | 15.96 s |
 
 Processing: H.264 video stream copied with faststart, preserving the full 1080 × 1080 frame, 25 fps, complete duration and original timing. No crop or re-encoding. The sources contain no audio. Poster images are sampled at 0.9 s, 1.0 s and 2.4 s respectively and resized to 720 × 720. Original files remain unchanged. The method and environment labels come from the user; these clips are not labeled as hardware recordings or as independent training benchmarks.
+
+### Cross-embodiment presentation · 2026-11-11
+
+The user confirmed that all nine clips in Cross-embodiment transfer (MorphMimic–X2, MorphMimic–H2, and Any2Any × SONIC–H2) are ONE-G physics simulations. All three groups and their expanded players are labeled `ONE-G 真实物理仿真` / `ONE-G physics simulation`. Individual motion titles are omitted from the galleries and expanded players; method and robot identifiers remain. Robot labels include the manufacturers: `智元 X2` / `AGIBOT X2` and `宇树 H2` / `Unitree H2`, as specified by the user. The source descriptions above are retained for asset provenance.
