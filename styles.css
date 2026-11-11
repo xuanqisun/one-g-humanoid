@@ -654,11 +654,27 @@ button[hidden],[hidden] {
   letter-spacing:-.04em;
   font-weight:600;
 }
+.compute-metric {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 42%;
+  align-items:center;
+  gap:12px;
+  margin-top:24px;
+  margin-bottom:8px;
+}
+.gpu-illustration {
+  display:block;
+  width:100%;
+  max-width:172px;
+  height:auto;
+  justify-self:end;
+  color:#8592a6;
+}
 .compute-number {
   font-size:100px;
   line-height:1.2;
   letter-spacing:-.07em;
-  margin-top:28px;
+  white-space:nowrap;
   font-weight:600;
   color:#2a61d8;
 }
@@ -1197,6 +1213,12 @@ dialog::backdrop {
   .compute-time {
     font-size:16px;
   }
+  .compute-number {
+    font-size:74px;
+  }
+  .compute-number span {
+    font-size:27px;
+  }
   .library-heading h2 {
     font-size:36px;
   }
@@ -1458,11 +1480,13 @@ dialog::backdrop {
     font-size:18px;
   }
   .compute-number {
-    font-size:85px;
+    font-size:clamp(64px,19vw,85px);
+  }
+  .compute-metric {
     margin-top:20px;
   }
   .compute-number span {
-    font-size:29px;
+    font-size:clamp(23px,7vw,29px);
   }
   .compute-card>p:not([class]) {
     font-size:13px;

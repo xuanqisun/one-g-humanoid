@@ -11,7 +11,7 @@
   <meta property="og:image" content="https://xuanqisun.github.io/one-g-humanoid/assets/images/pick-poster.jpg">
   <title>ONE-G · 人形机器人运动控制</title>
   <link rel="icon" type="image/svg+xml" href="assets/brand/one-g-symbol.svg">
-  <link rel="stylesheet" href="styles.css?v=20261111-icons">
+  <link rel="stylesheet" href="styles.css?v=20261111-gpu">
   <script src="script.js?v=20261111-icons" defer></script>
 </head>
 <body>
@@ -29,6 +29,20 @@
     <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="icon-top" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6M6 4h12"/></symbol>
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="gpu-board" viewBox="0 0 168 56">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5H6v44h6M3 12h3m-3 30h3"/>
+        <rect x="12" y="9" width="148" height="34" rx="5" fill="#fff"/>
+        <path d="M31 43v8h65v-8" fill="#eff4ff"/>
+        <path d="M37 46v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5" stroke="#9baed0"/>
+        <rect x="31" y="16" width="22" height="20" rx="3" fill="#eff4ff" stroke="#6c8fc8"/>
+        <rect x="37" y="22" width="10" height="8" rx="1.5" stroke="#6c8fc8"/>
+        <path d="M22 22h9m-9 8h9m22-8h10m-10 8h10" stroke="#9baed0"/>
+        <rect x="73" y="16" width="70" height="20" rx="3"/>
+        <path d="M81 20v12m8-12v12m8-12v12m8-12v12m8-12v12m8-12v12m8-12v12m8-12v12"/>
+        <circle cx="152" cy="17" r="1"/><circle cx="152" cy="35" r="1"/>
+      </g>
+    </symbol>
   </svg>
   <a class="skip-link" href="#main" data-en="Skip to content">跳至正文</a>
   <header class="site-header">
@@ -103,8 +117,32 @@
       <div class="shell">
         <div class="section-heading"><p class="eyebrow">03 / MOTION LEARNING</p><h2 id="learning-heading" data-en="Efficient motion learning">高效动作学习</h2><p class="section-lede" data-en="Differentiable world models for efficient control-policy training">通过可微世界模型优化控制策略，降低动作学习的训练开销</p></div>
         <div class="compute-grid">
-          <article class="compute-card"><div class="compute-top"><h3>SuperMimic</h3><span class="pill" data-en="PAPER RESULT">论文数据</span></div><p class="compute-number">1 <span>GPU</span></p><p class="compute-time" data-en="3 hours · NVIDIA H100">3 小时 · NVIDIA H100</p><p data-en="Exceeds the released SONIC checkpoint’s normalized return in the paper’s benchmark.">在原论文基准中超过 SONIC 发布模型的归一化回报。</p><button class="text-link route-link" data-route="supermimic"><span data-en="SuperMimic method">SuperMimic 方法</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></article>
-          <article class="compute-card"><div class="compute-top"><h3>MorphMimic</h3><span class="pill" data-en="PAPER RESULT">论文数据</span></div><p class="compute-number">3 <span>GPUs</span></p><p class="compute-time" data-en="5 h 26 min · NVIDIA H100 NVL">5 小时 26 分钟 · NVIDIA H100 NVL</p><p data-en="A unified model for G1, X2 Ultra and T2, sharing one set of weights.">训练 G1、X2 Ultra 与 T2 的统一模型，共享一套权重。</p><button class="text-link route-link" data-route="morphmimic"><span data-en="MorphMimic method">MorphMimic 方法</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></article>
+          <article class="compute-card">
+            <div class="compute-top"><h3>SuperMimic</h3><span class="pill" data-en="PAPER RESULT">论文数据</span></div>
+            <div class="compute-metric">
+              <p class="compute-number">1 <span>GPU</span></p>
+              <svg class="gpu-illustration" width="196" height="164" viewBox="0 0 196 164" aria-hidden="true" focusable="false">
+                <use href="#gpu-board" x="14" y="54" width="168" height="56"/>
+              </svg>
+            </div>
+            <p class="compute-time" data-en="3 hours · NVIDIA H100">3 小时 · NVIDIA H100</p>
+            <p data-en="Exceeds the released SONIC checkpoint’s normalized return in the paper’s benchmark.">在原论文基准中超过 SONIC 发布模型的归一化回报。</p>
+            <button class="text-link route-link" data-route="supermimic"><span data-en="SuperMimic method">SuperMimic 方法</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button>
+          </article>
+          <article class="compute-card">
+            <div class="compute-top"><h3>MorphMimic</h3><span class="pill" data-en="PAPER RESULT">论文数据</span></div>
+            <div class="compute-metric">
+              <p class="compute-number">3 <span>GPUs</span></p>
+              <svg class="gpu-illustration" width="196" height="164" viewBox="0 0 196 164" aria-hidden="true" focusable="false">
+                <use href="#gpu-board" x="2" y="0" width="168" height="56"/>
+                <use href="#gpu-board" x="14" y="54" width="168" height="56"/>
+                <use href="#gpu-board" x="26" y="108" width="168" height="56"/>
+              </svg>
+            </div>
+            <p class="compute-time" data-en="5 h 26 min · NVIDIA H100 NVL">5 小时 26 分钟 · NVIDIA H100 NVL</p>
+            <p data-en="A unified model for G1, X2 Ultra and T2, sharing one set of weights.">训练 G1、X2 Ultra 与 T2 的统一模型，共享一套权重。</p>
+            <button class="text-link route-link" data-route="morphmimic"><span data-en="MorphMimic method">MorphMimic 方法</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button>
+          </article>
         </div>
         <p class="compute-footnote" data-en="Training configurations and evaluation protocols are detailed in the original papers.">训练配置与评估条件详见原论文</p>
       </div>
