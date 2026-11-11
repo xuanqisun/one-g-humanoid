@@ -29,18 +29,27 @@
     <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="icon-top" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6M6 4h12"/></symbol>
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="gpu-fan" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="18"/>
+      <g fill="#eff4ff" stroke="#8ca0bd" stroke-width="1.1">
+        <path d="M18 16C12 16 8 13 7 8c5-2 11 1 15 8"/>
+        <path d="M18 16C12 16 8 13 7 8c5-2 11 1 15 8" transform="rotate(60 20 20)"/>
+        <path d="M18 16C12 16 8 13 7 8c5-2 11 1 15 8" transform="rotate(120 20 20)"/>
+        <path d="M18 16C12 16 8 13 7 8c5-2 11 1 15 8" transform="rotate(180 20 20)"/>
+        <path d="M18 16C12 16 8 13 7 8c5-2 11 1 15 8" transform="rotate(240 20 20)"/>
+        <path d="M18 16C12 16 8 13 7 8c5-2 11 1 15 8" transform="rotate(300 20 20)"/>
+      </g>
+      <circle cx="20" cy="20" r="4" fill="#fff" stroke="#6c8fc8"/>
+    </symbol>
     <symbol id="gpu-board" viewBox="0 0 168 56">
       <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 5H6v44h6M3 12h3m-3 30h3"/>
-        <rect x="12" y="9" width="148" height="34" rx="5" fill="#fff"/>
-        <path d="M31 43v8h65v-8" fill="#eff4ff"/>
-        <path d="M37 46v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5" stroke="#9baed0"/>
-        <rect x="31" y="16" width="22" height="20" rx="3" fill="#eff4ff" stroke="#6c8fc8"/>
-        <rect x="37" y="22" width="10" height="8" rx="1.5" stroke="#6c8fc8"/>
-        <path d="M22 22h9m-9 8h9m22-8h10m-10 8h10" stroke="#9baed0"/>
-        <rect x="73" y="16" width="70" height="20" rx="3"/>
-        <path d="M81 20v12m8-12v12m8-12v12m8-12v12m8-12v12m8-12v12m8-12v12m8-12v12"/>
-        <circle cx="152" cy="17" r="1"/><circle cx="152" cy="35" r="1"/>
+        <path d="M31 48v6h65v-6" fill="#eff4ff"/>
+        <path d="M37 49v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5m6-5v5" stroke="#9baed0"/>
+        <rect x="12" y="4" width="148" height="44" rx="7" fill="#fff"/>
+        <path d="m87 10-7 32M20 14v24m132-24v24" stroke="#bac4d3"/>
+        <use href="#gpu-fan" x="32" y="5" width="42" height="42"/>
+        <use href="#gpu-fan" x="97" y="5" width="42" height="42"/>
       </g>
     </symbol>
   </svg>
