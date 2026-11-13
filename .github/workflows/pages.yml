@@ -29,13 +29,12 @@ jobs:
 
       - name: Validate website
         run: |
-          node --check script.js
-          python3 scripts/check_site.py
+          npm run check
 
       - name: Prepare static files
         run: |
           mkdir _site
-          cp index.html styles.css script.js .nojekyll _site/
+          cp index.html styles.css script.js training.js .nojekyll _site/
           cp -R assets _site/assets
 
       - name: Configure Pages

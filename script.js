@@ -12,6 +12,7 @@ let allDemos = false;
 let lastDialogTrigger;
 const motionStates = new Map();
 const visibleMotion = new WeakMap();
+let teleopLayoutKey = '';
 const text = value => typeof value === 'string' ? value : value[language];
 
 const modes = {
@@ -139,6 +140,30 @@ function setTransfer(next) {
   });
   syncMotionPlayback();
 }
+function sizeTeleopCopy() {
+  const copy = $('.teleop-copy');
+  const width = copy.getBoundingClientRect().width;
+  const key = `${width}:${language}`;
+  if (key === teleopLayoutKey) return;
+  // Reserve the taller mode at the current width, including translated text wrapping.
+  const measure = copy.cloneNode(true);
+  const fields = ['title', 'description', 'input', 'effect'].map(field => [field, $(`#mode-${field}`, measure)]);
+  $$('[id]', measure).forEach(element => element.removeAttribute('id'));
+  measure.classList.add('teleop-copy-measure');
+  measure.setAttribute('aria-hidden', 'true');
+  measure.inert = true;
+  measure.style.width = `${width}px`;
+  copy.after(measure);
+  let height = 0;
+  Object.values(modes).forEach(data => {
+    fields.forEach(([field, element]) => {element.textContent = text(data[field]);});
+    height = Math.max(height, measure.getBoundingClientRect().height);
+  });
+  measure.remove();
+  copy.style.minHeight = `${Math.ceil(height)}px`;
+  teleopLayoutKey = key;
+}
+
 function setMode(next, changeMedia = true) {
   mode = next;
   const data = modes[mode];
@@ -149,6 +174,7 @@ function setMode(next, changeMedia = true) {
   $('#mode-description').textContent = text(data.description);
   $('#mode-input').textContent = text(data.input);
   $('#mode-effect').textContent = text(data.effect);
+  sizeTeleopCopy();
   const video = $('#teleop-video');
   video.setAttribute('aria-label', text(data.title).replace(/<br>/g,' '));
   if (changeMedia) {video.pause();video.poster = `assets/images/${data.poster}`;video.src = `assets/videos/${data.video}`;delete video.dataset.src;video.load();}
@@ -206,7 +232,7 @@ function applyLanguage() {
   $('#language-toggle .language-label').textContent=language==='zh'?'EN':'中文';
   $('#language-toggle').setAttribute('aria-label',language==='zh'?'Switch to English':'切换为中文');
   $('#hero-video').setAttribute('aria-label',language==='zh'?'ONE-G G1 全身遥操：俯身抓取':'ONE-G G1 whole-body teleoperation: bend and grasp');
-  setMode(mode,false);setMethod(method);renderDemos();updateHeroButton();updateMotionControls();
+  setMode(mode,false);setMethod(method);renderDemos();updateHeroButton();updateMotionControls();trainingView.setLanguage(language);
 }
 
 $('#language-toggle').addEventListener('click',()=>{language=language==='zh'?'en':'zh';try{localStorage.setItem('one-g-language',language);}catch{}applyLanguage();});
@@ -339,4 +365,6 @@ const visibilityObserver=new IntersectionObserver(entries=>entries.forEach(entry
 }),{threshold:.15});
 $$('video').forEach(video=>visibilityObserver.observe(video));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)$$('video').forEach(video=>video.pause());else syncMotionPlayback();});
+const trainingView = createTrainingView($('#learning'), trainingCurves);
 applyLanguage();
+new ResizeObserver(sizeTeleopCopy).observe($('.teleop-copy'));
