@@ -11,8 +11,10 @@
   <meta property="og:image" content="https://xuanqisun.github.io/one-g-humanoid/assets/images/pick-poster.jpg">
   <title>ONE-G · 人形机器人运动控制</title>
   <link rel="icon" type="image/svg+xml" href="assets/brand/one-g-symbol.svg">
-  <link rel="stylesheet" href="styles.css?v=20261111-x2-light">
-  <script src="script.js?v=20261111-transfer-clean" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261113-vector-brand">
+  <script src="assets/data/training-curves.js?v=20261113-curves-merged" defer></script>
+  <script src="training.js?v=20261113-curves-merged" defer></script>
+  <script src="script.js?v=20261113-unified-demos" defer></script>
 </head>
 <body>
   <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -46,7 +48,7 @@
   </svg>
   <a class="skip-link" href="#main" data-en="Skip to content">跳至正文</a>
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="ONE-G 首页"><img src="assets/brand/one-g-black.png" width="112" height="52" alt="ONE-G Robotics"></a>
+    <a class="brand" href="#top" aria-label="ONE-G 首页"><span class="brand-logo"><img class="brand-logo-mark" src="assets/brand/one-g-mark.svg" width="905" height="905" alt="" aria-hidden="true"><img class="brand-logo-wordmark" src="assets/brand/one-g-black.png" width="2112" height="971" alt="ONE-G Robotics"></span></a>
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#capabilities" data-en="Capabilities">能力</a>
       <a href="#technology" data-en="Technology">技术路线</a>
@@ -114,9 +116,10 @@
         <div class="section-heading"><p class="eyebrow">02 / CROSS-EMBODIMENT</p><h2 id="embodiment-heading" data-en="Cross-embodiment transfer">跨本体迁移</h2><p class="section-lede" data-en="Policy adaptation and shared models for different robot morphologies">通过策略适配与共享模型，将控制能力迁移到不同机器人</p></div>
         <div class="motion-showcase" id="transfer-showcase">
           <div class="motion-toolbar">
-            <div class="motion-tabs" role="tablist" aria-label="Cross-embodiment methods">
+            <div class="motion-tabs" role="tablist" aria-label="Simulation methods">
               <button id="transfer-morph" type="button" role="tab" aria-controls="transfer-morph-panel" aria-selected="true" data-transfer="morph">MorphMimic</button>
               <button id="transfer-sonic" type="button" role="tab" aria-controls="transfer-sonic-panel" aria-selected="false" tabindex="-1" data-transfer="sonic">Any2Any × SONIC</button>
+              <button id="transfer-super" type="button" role="tab" aria-controls="transfer-super-panel" aria-selected="false" tabindex="-1" data-transfer="super">SuperMimic</button>
             </div>
             <button class="motion-playback" type="button" aria-label="暂停这组演示"><svg class="icon motion-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-pause"/></svg><span class="motion-control-label">暂停</span></button>
           </div>
@@ -125,22 +128,25 @@
               <div class="motion-robot-heading"><h3 id="morph-x2-heading" data-en="AGIBOT X2">智元 X2</h3><p data-en="ONE-G physics simulation">ONE-G 真实物理仿真</p></div>
               <div class="motion-stage">
                 <figure class="motion-item" data-motion-source="MorphMimic · 智元 X2" data-motion-source-en="MorphMimic · AGIBOT X2" data-motion-environment="physics">
-                  <button class="motion-open" type="button" aria-label="放大播放：MorphMimic · 智元 X2 · 演示 1">
+                  <button class="motion-open" type="button" aria-label="放大播放：踢步组合">
                     <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-x2-kick.mp4" poster="assets/images/motion/morph-x2-kick.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
                     <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
                   </button>
+                  <figcaption><h3 data-en="Kick-step sequence">踢步组合</h3></figcaption>
                 </figure>
                 <figure class="motion-item" data-motion-source="MorphMimic · 智元 X2" data-motion-source-en="MorphMimic · AGIBOT X2" data-motion-environment="physics">
-                  <button class="motion-open" type="button" aria-label="放大播放：MorphMimic · 智元 X2 · 演示 2">
+                  <button class="motion-open" type="button" aria-label="放大播放：转身舞步">
                     <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-x2-turn.mp4" poster="assets/images/motion/morph-x2-turn.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
                     <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
                   </button>
+                  <figcaption><h3 data-en="Turning dance">转身舞步</h3></figcaption>
                 </figure>
                 <figure class="motion-item" data-motion-source="MorphMimic · 智元 X2" data-motion-source-en="MorphMimic · AGIBOT X2" data-motion-environment="physics">
-                  <button class="motion-open" type="button" aria-label="放大播放：MorphMimic · 智元 X2 · 演示 3">
+                  <button class="motion-open" type="button" aria-label="放大播放：全身舞蹈">
                     <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-x2-dance.mp4" poster="assets/images/motion/morph-x2-dance.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
                     <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
                   </button>
+                  <figcaption><h3 data-en="Full-body dance">全身舞蹈</h3></figcaption>
                 </figure>
               </div>
 
@@ -149,22 +155,25 @@
               <div class="motion-robot-heading"><h3 id="morph-h2-heading" data-en="Unitree H2">宇树 H2</h3><p data-en="ONE-G physics simulation">ONE-G 真实物理仿真</p></div>
             <div class="motion-stage">
 <figure class="motion-item" data-motion-source="MorphMimic · 宇树 H2" data-motion-source-en="MorphMimic · Unitree H2" data-motion-environment="physics">
-          <button class="motion-open" type="button" aria-label="放大播放：MorphMimic · 宇树 H2 · 演示 1">
+          <button class="motion-open" type="button" aria-label="放大播放：嘻哈舞步">
             <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-hiphop.mp4" poster="assets/images/motion/morph-hiphop.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
           </button>
+          <figcaption><h3 data-en="Hip-hop steps">嘻哈舞步</h3></figcaption>
         </figure>
 <figure class="motion-item" data-motion-source="MorphMimic · 宇树 H2" data-motion-source-en="MorphMimic · Unitree H2" data-motion-environment="physics">
-          <button class="motion-open" type="button" aria-label="放大播放：MorphMimic · 宇树 H2 · 演示 2">
+          <button class="motion-open" type="button" aria-label="放大播放：拉丁踢步">
             <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-latin.mp4" poster="assets/images/motion/morph-latin.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
           </button>
+          <figcaption><h3 data-en="Latin kicks">拉丁踢步</h3></figcaption>
         </figure>
 <figure class="motion-item" data-motion-source="MorphMimic · 宇树 H2" data-motion-source-en="MorphMimic · Unitree H2" data-motion-environment="physics">
-          <button class="motion-open" type="button" aria-label="放大播放：MorphMimic · 宇树 H2 · 演示 3">
+          <button class="motion-open" type="button" aria-label="放大播放：空击拳">
             <video data-gallery="transfer-showcase" data-src="assets/videos/motion/morph-boxing.mp4" poster="assets/images/motion/morph-boxing.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
           </button>
+          <figcaption><h3 data-en="Shadowboxing">空击拳</h3></figcaption>
         </figure>
 </div>
 
@@ -174,25 +183,54 @@
           <div id="transfer-sonic-panel" class="motion-panel" role="tabpanel" aria-labelledby="transfer-sonic" hidden>
             <div class="motion-stage">
 <figure class="motion-item" data-motion-source="Any2Any × SONIC · 宇树 H2" data-motion-source-en="Any2Any × SONIC · Unitree H2" data-motion-environment="physics">
-          <button class="motion-open" type="button" aria-label="放大播放：Any2Any × SONIC · 宇树 H2 · 演示 1">
+          <button class="motion-open" type="button" aria-label="放大播放：交叉步转身">
             <video data-gallery="transfer-showcase" data-src="assets/videos/motion/sonic-turn.mp4" poster="assets/images/motion/sonic-turn.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
           </button>
+          <figcaption><h3 data-en="Crossover turn">交叉步转身</h3></figcaption>
         </figure>
 <figure class="motion-item" data-motion-source="Any2Any × SONIC · 宇树 H2" data-motion-source-en="Any2Any × SONIC · Unitree H2" data-motion-environment="physics">
-          <button class="motion-open" type="button" aria-label="放大播放：Any2Any × SONIC · 宇树 H2 · 演示 2">
+          <button class="motion-open" type="button" aria-label="放大播放：蓄力高跳">
             <video data-gallery="transfer-showcase" data-src="assets/videos/motion/sonic-jump.mp4" poster="assets/images/motion/sonic-jump.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
           </button>
+          <figcaption><h3 data-en="Power jump">蓄力高跳</h3></figcaption>
         </figure>
 <figure class="motion-item" data-motion-source="Any2Any × SONIC · 宇树 H2" data-motion-source-en="Any2Any × SONIC · Unitree H2" data-motion-environment="physics">
-          <button class="motion-open" type="button" aria-label="放大播放：Any2Any × SONIC · 宇树 H2 · 演示 3">
+          <button class="motion-open" type="button" aria-label="放大播放：萨尔萨舞">
             <video data-gallery="transfer-showcase" data-src="assets/videos/motion/sonic-salsa.mp4" poster="assets/images/motion/sonic-salsa.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
             <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
           </button>
+          <figcaption><h3 data-en="Salsa steps">萨尔萨舞</h3></figcaption>
         </figure>
 </div>
             <div class="motion-footer"><p><span data-en="Unitree H2">宇树 H2</span><span data-en="ONE-G physics simulation">ONE-G 真实物理仿真</span></p><button class="text-link route-link" data-route="any2any"><span data-en="Any2Any method">Any2Any 技术路线</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></div>
+          </div>
+          <div id="transfer-super-panel" class="motion-panel" role="tabpanel" aria-labelledby="transfer-super" hidden>
+          <div class="motion-stage">
+<figure class="motion-item" data-motion-source="SuperMimic · G1">
+          <button class="motion-open" type="button" aria-label="放大播放：后空翻">
+            <video data-gallery="transfer-showcase" data-src="assets/videos/motion/super-backflip.mp4" poster="assets/images/motion/super-backflip.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+            <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
+          </button>
+          <figcaption><h3 data-en="Backflip">后空翻</h3></figcaption>
+        </figure>
+<figure class="motion-item" data-motion-source="SuperMimic · G1">
+          <button class="motion-open" type="button" aria-label="放大播放：侧手翻">
+            <video data-gallery="transfer-showcase" data-src="assets/videos/motion/super-cartwheel.mp4" poster="assets/images/motion/super-cartwheel.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+            <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
+          </button>
+          <figcaption><h3 data-en="Cartwheel">侧手翻</h3></figcaption>
+        </figure>
+<figure class="motion-item" data-motion-source="SuperMimic · G1">
+          <button class="motion-open" type="button" aria-label="放大播放：前空翻">
+            <video data-gallery="transfer-showcase" data-src="assets/videos/motion/super-frontflip.mp4" poster="assets/images/motion/super-frontflip.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+            <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
+          </button>
+          <figcaption><h3 data-en="Front flip">前空翻</h3></figcaption>
+        </figure>
+</div>
+          <div class="motion-footer"><p><span>G1</span><span data-en="ONE-G simulation">ONE-G 仿真</span></p><button class="text-link route-link" data-route="supermimic"><span data-en="SuperMimic method">SuperMimic 技术路线</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></div>
           </div>
         </div>
       </div>
@@ -200,63 +238,45 @@
 
     <section class="chapter learning-section" id="learning" aria-labelledby="learning-heading">
       <div class="shell">
-        <div class="section-heading"><p class="eyebrow">03 / MOTION LEARNING</p><h2 id="learning-heading" data-en="Efficient motion learning">高效动作学习</h2><p class="section-lede" data-en="Differentiable world models for efficient control-policy training">通过可微世界模型优化控制策略，降低动作学习的训练开销</p></div>
-        <div class="motion-showcase" id="learning-showcase">
-          <div class="motion-toolbar"><h3 class="motion-method-name">SuperMimic</h3><button class="motion-playback" type="button" aria-label="暂停这组演示"><svg class="icon motion-control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-pause"/></svg><span class="motion-control-label">暂停</span></button></div>
-          <div class="motion-stage">
-<figure class="motion-item" data-motion-source="SuperMimic · G1">
-          <button class="motion-open" type="button" aria-label="放大播放：后空翻">
-            <video data-gallery="learning-showcase" data-src="assets/videos/motion/super-backflip.mp4" poster="assets/images/motion/super-backflip.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-            <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
-          </button>
-          <figcaption><h3 data-en="Backflip">后空翻</h3></figcaption>
-        </figure>
-<figure class="motion-item" data-motion-source="SuperMimic · G1">
-          <button class="motion-open" type="button" aria-label="放大播放：侧手翻">
-            <video data-gallery="learning-showcase" data-src="assets/videos/motion/super-cartwheel.mp4" poster="assets/images/motion/super-cartwheel.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-            <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
-          </button>
-          <figcaption><h3 data-en="Cartwheel">侧手翻</h3></figcaption>
-        </figure>
-<figure class="motion-item" data-motion-source="SuperMimic · G1">
-          <button class="motion-open" type="button" aria-label="放大播放：前空翻">
-            <video data-gallery="learning-showcase" data-src="assets/videos/motion/super-frontflip.mp4" poster="assets/images/motion/super-frontflip.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-            <span class="motion-expand" aria-hidden="true"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-expand"/></svg></span>
-          </button>
-          <figcaption><h3 data-en="Front flip">前空翻</h3></figcaption>
-        </figure>
-</div>
-          <div class="motion-footer"><p><span>G1</span><span data-en="ONE-G simulation">ONE-G 仿真</span></p><button class="text-link route-link" data-route="supermimic"><span data-en="SuperMimic method">SuperMimic 技术路线</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button></div>
+        <div class="section-heading"><p class="eyebrow">03 / MOTION LEARNING</p><h2 id="learning-heading" data-en="Efficient motion learning">高效动作学习</h2></div>
+        <div class="segmented training-tabs" role="tablist" aria-label="Training experiments">
+          <button type="button" id="training-supermimic" role="tab" aria-controls="training-panel" aria-selected="true" data-training-model="supermimic">SuperMimic <span>G1</span></button>
+          <button type="button" id="training-morphmimic" role="tab" aria-controls="training-panel" aria-selected="false" tabindex="-1" data-training-model="morphmimic">MorphMimic <span>H2 + G1</span></button>
         </div>
-        <div class="compute-grid">
-          <article class="compute-card">
-            <div class="compute-top"><h3>SuperMimic</h3><span class="pill" data-en="PAPER RESULT">论文数据</span></div>
-            <div class="compute-metric">
-              <p class="compute-number">1 <span>GPU</span></p>
-              <svg class="gpu-illustration" width="196" height="164" viewBox="0 0 196 164" aria-hidden="true" focusable="false">
-                <use href="#gpu-board" x="14" y="54" width="168" height="56"/>
-              </svg>
+        <div class="training-panel" id="training-panel" role="tabpanel" aria-labelledby="training-supermimic">
+          <div class="training-overview">
+            <div class="training-stat training-resource">
+              <div><p class="training-label" data-en="Training resources">训练资源</p><p class="training-number" id="training-hardware">1 <small>GPU</small></p><p class="training-note">NVIDIA RTX 4090</p></div>
+              <svg class="training-gpu" id="training-gpu" viewBox="0 0 180 112" aria-hidden="true" focusable="false"><use href="#gpu-board" x="6" y="28" width="168" height="56"/></svg>
             </div>
-            <p class="compute-time" data-en="3 hours · NVIDIA H100">3 小时 · NVIDIA H100</p>
-            <p data-en="Exceeds the released SONIC checkpoint’s normalized return in the paper’s benchmark.">在原论文基准中超过 SONIC 发布模型的归一化回报。</p>
-            <button class="text-link route-link" data-route="supermimic"><span data-en="SuperMimic method">SuperMimic 方法</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button>
-          </article>
-          <article class="compute-card">
-            <div class="compute-top"><h3>MorphMimic</h3><span class="pill" data-en="PAPER RESULT">论文数据</span></div>
-            <div class="compute-metric">
-              <p class="compute-number">3 <span>GPUs</span></p>
-              <svg class="gpu-illustration" width="196" height="164" viewBox="0 0 196 164" aria-hidden="true" focusable="false">
-                <use href="#gpu-board" x="2" y="0" width="168" height="56"/>
-                <use href="#gpu-board" x="14" y="54" width="168" height="56"/>
-                <use href="#gpu-board" x="26" y="108" width="168" height="56"/>
-              </svg>
+            <div class="training-stats">
+              <div class="training-stat"><p class="training-label" id="training-time-label" data-en="Training time">训练时长</p><p class="training-number" id="training-time">9<small>h</small> 50<small>m</small></p><p class="training-note" id="training-time-note">含周期验证</p></div>
+              <div class="training-stat"><p class="training-label" id="training-step-label" data-en="Training iterations">训练迭代</p><p class="training-number" id="training-total">150,000</p><p class="training-note" id="training-environments">每卡 4,096 个并行环境</p></div>
             </div>
-            <p class="compute-time" data-en="5 h 26 min · NVIDIA H100 NVL">5 小时 26 分钟 · NVIDIA H100 NVL</p>
-            <p data-en="A unified model for G1, X2 Ultra and T2, sharing one set of weights.">训练 G1、X2 Ultra 与 T2 的统一模型，共享一套权重。</p>
-            <button class="text-link route-link" data-route="morphmimic"><span data-en="MorphMimic method">MorphMimic 方法</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-nodes"/></svg></button>
-          </article>
+            <div class="training-test">
+              <div class="training-test-heading"><span data-en="Simulation test">仿真测试</span><span id="training-checkpoint">148k</span></div>
+              <div class="training-results" id="training-results"></div>
+            </div>
+          </div>
+          <div class="training-chart-heading">
+            <div class="training-metrics" role="group" aria-label="Curve metric"><button type="button" data-training-metric="train" aria-pressed="true" data-en="Training return">训练回报</button><button type="button" data-training-metric="validation" aria-pressed="false" id="training-validation-label" data-en="Validation return">验证回报</button><button type="button" data-training-metric="loss" aria-pressed="false" data-en="Model loss">模型损失</button><button type="button" data-training-metric="prediction" aria-pressed="false" data-en="Prediction error">预测误差</button></div>
+            <div class="training-chart-context">
+              <span class="training-axis-label" id="training-axis-label">归一化回报</span>
+              <label class="training-detail" id="training-detail-label" hidden><span class="visually-hidden" data-en="Prediction metric">预测指标</span><select id="training-detail"><option value="pelvis" data-en="Pelvis position">骨盆位置</option><option value="joint" data-en="Joint angle">关节角度</option></select></label>
+              <span class="training-axis-label" id="training-direction">越高越好</span>
+            </div>
+          </div>
+          <svg class="training-chart" id="training-chart" role="img" aria-label="训练回报曲线" aria-describedby="training-chart-description"></svg>
+          <p class="visually-hidden" id="training-chart-description"></p>
+          <div class="training-readout"><span id="training-step-readout">迭代 150,000</span><div id="training-values"></div></div>
+          <div class="training-playback">
+            <button class="button training-play" id="training-play" type="button"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-play"/></svg><span id="training-play-label">回放训练</span></button>
+            <input type="range" id="training-progress" min="0" max="2999" value="2999" step="1" aria-label="选择训练迭代">
+            <span id="training-progress-value">150k / 150k</span>
+          </div>
+          <p class="visually-hidden" id="training-status" aria-live="polite"></p>
         </div>
-        <p class="compute-footnote" data-en="Training configurations and evaluation protocols are detailed in the original papers.">训练配置与评估条件详见原论文</p>
+
       </div>
     </section>
 
@@ -283,7 +303,7 @@
     </section>
 
   </main>
-  <footer class="site-footer shell"><a href="#top" aria-label="ONE-G 首页"><img src="assets/brand/one-g-black.png" width="112" height="52" alt="ONE-G Robotics"></a><p>© 2026 ONE-G</p><a href="https://github.com/xuanqisun/one-g-humanoid/blob/main/docs/SOURCES.md" target="_blank" rel="noopener noreferrer"><span data-en="References">文献与来源</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-file"/></svg></a><a href="#top"><span data-en="Back to top">返回顶部</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-top"/></svg></a></footer>
+  <footer class="site-footer shell"><a href="#top" aria-label="ONE-G 首页"><span class="brand-logo"><img class="brand-logo-mark" src="assets/brand/one-g-mark.svg" width="905" height="905" alt="" aria-hidden="true"><img class="brand-logo-wordmark" src="assets/brand/one-g-black.png" width="2112" height="971" alt="ONE-G Robotics"></span></a><p>© 2026 ONE-G</p><a href="https://github.com/xuanqisun/one-g-humanoid/blob/main/docs/SOURCES.md" target="_blank" rel="noopener noreferrer"><span data-en="References">文献与来源</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-file"/></svg></a><a href="#top"><span data-en="Back to top">返回顶部</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-top"/></svg></a></footer>
 
   <dialog id="media-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><h2 id="dialog-title"></h2><button class="round-button" id="dialog-close" aria-label="关闭 / Close"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#icon-close"/></svg></button></div><div id="dialog-content"></div><p id="dialog-caption"></p></dialog>
   <noscript><p class="noscript-note">请启用 JavaScript 以切换演示和技术路线。论文主页：<a href="https://nvlabs.github.io/GEAR-SONIC/">SONIC</a> · <a href="https://any2any.top/">Any2Any</a> · <a href="https://lzyang2000.github.io/morphmimic/">MorphMimic</a> · <a href="https://supermimic.github.io/">SuperMimic</a></p></noscript>

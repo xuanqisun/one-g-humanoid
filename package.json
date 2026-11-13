@@ -5,6 +5,6 @@
   "description": "ONE-G humanoid capabilities: teleoperation, cross-embodiment and efficient motion learning.",
   "scripts": {
     "dev": "python3 -m http.server 4173 --bind 127.0.0.1",
-    "check": "node --check script.js && python3 scripts/check_site.py"
+    "check": "node --check script.js && node --check training.js && node --check assets/data/training-curves.js && python3 scripts/check_site.py"
   }
 }

@@ -2,6 +2,10 @@
 
 Checked 2026-11-11. Company identity: **ONE-G**.
 
+## Brand rendering
+
+The header and footer combine the original wordmark from `assets/brand/one-g-black.png` with the existing vector symbol. `one-g-mark.svg` preserves the exact path from `one-g-symbol.svg` and only tightens its viewBox. CSS keeps the mark at its original position and scale in the 2112 × 971 lockup; the raster symbol is clipped out to avoid overlapping edges. No brand shapes or lettering were redrawn.
+
 ## Visual reference
 
 - https://supermimic.github.io/
@@ -51,7 +55,8 @@ Checked 2026-11-11. Company identity: **ONE-G**.
 - Local figure: `assets/papers/supermimic-training-loop.png`
 - Attribution: Liao et al., 2026, Figure 2 on page 4. Extracted from the original PDF; crop removes surrounding text, retaining the complete figure. No redrawing or relabeling.
 - Paper: 1 H100, 3 hours to exceed the released SONIC checkpoint's normalized return; 2 H100s, 9.8 hours for zero failures on 129,514 benchmark motions. The benchmark includes training motions and measures motion coverage, not unseen-task generalization. Hardware and dataset differ from SONIC's original training.
-- The new G1 clips are user-supplied ONE-G SuperMimic demonstrations. No ONE-G training-time or GPU benchmark is claimed; the compute cards remain author-reported paper results.
+- The new G1 clips are user-supplied ONE-G SuperMimic demonstrations.
+- The learning section now presents ONE-G's supplied SuperMimic training run; its data and evaluation definitions are recorded in [TRAINING_DATA.md](TRAINING_DATA.md).
 
 ## Figure rights
 
@@ -63,7 +68,7 @@ Existing clips: `https://github.com/xuanqisun/g1-humanoid-teleoperation`, source
 
 User-supplied clips: `H2_morphmimic.mp4`, `X2_morphmimic.mp4`, `双模式三点遥操真机.mp4`.
 
-The site distinguishes real hardware and simulation. Reported durations are rounded from ffprobe. Paper training measurements are labeled as paper results. No company benchmark numbers are invented.
+The site distinguishes real hardware and simulation. Reported video durations are rounded from ffprobe. The learning section uses the supplied ONE-G training reports; research-method references above retain their original paper scope.
 
 ### White-background motion demonstrations · 2026-11-11
 
@@ -77,7 +82,7 @@ Supplied by the user's colleague in the `九个独立Demo_v4_S2_M1_白底1080p50
 
 Descriptions follow the burned-in source captions. The original `flip_180` filename is displayed as 前空翻, matching its caption. The `sonic_h2` group is labeled Any2Any × SONIC according to the user's description. The new demonstration groups do not establish that the robots share identical checkpoints, training budgets or motion datasets.
 
-Processing: center crop `1200:1080:360:0` from 1920 × 1080, preserving 50 fps. G1 backflip uses the first 7 seconds as requested; the other eight clips retain their complete duration. H.264/yuv420p, CRF 18, faststart; no speed changes. Crop removes white side margins and burned-in titles; frame checks preserve robot and main contact shadow. Motion-learning web labels replace the removed captions; cross-embodiment galleries omit individual motion titles. Original files remain unchanged.
+Processing: center crop `1200:1080:360:0` from 1920 × 1080, preserving 50 fps. G1 backflip uses the first 7 seconds as requested; the other eight clips retain their complete duration. H.264/yuv420p, CRF 18, faststart; no speed changes. Crop removes white side margins and burned-in titles; frame checks preserve robot and main contact shadow. Web labels replace the removed captions with concise motion names. Original files remain unchanged.
 
 ### X2 physics simulation · 2026-11-11
 
@@ -93,4 +98,14 @@ Processing: H.264 video stream copied with faststart, preserving the full 1080 �
 
 ### Cross-embodiment presentation · 2026-11-11
 
-The user confirmed that all nine clips in Cross-embodiment transfer (MorphMimic–X2, MorphMimic–H2, and Any2Any × SONIC–H2) are ONE-G physics simulations. All three groups and their expanded players are labeled `ONE-G 真实物理仿真` / `ONE-G physics simulation`. Individual motion titles are omitted from the galleries and expanded players; method and robot identifiers remain. Robot labels include the manufacturers: `智元 X2` / `AGIBOT X2` and `宇树 H2` / `Unitree H2`, as specified by the user. The source descriptions above are retained for asset provenance.
+The user confirmed that all nine clips in Cross-embodiment transfer (MorphMimic–X2, MorphMimic–H2, and Any2Any × SONIC–H2) are ONE-G physics simulations. All three groups and their expanded players are labeled `ONE-G 真实物理仿真` / `ONE-G physics simulation`. Robot labels include the manufacturers: `智元 X2` / `AGIBOT X2` and `宇树 H2` / `Unitree H2`, as specified by the user. The source descriptions above are retained for asset provenance.
+
+Presentation update · 2026-11-13: the three SuperMimic–G1 clips now occupy a third tab beside MorphMimic and Any2Any × SONIC. Their motion names and original `ONE-G simulation` label remain; the training charts stay in Motion learning.
+
+Each simulation now has a concise bilingual caption, also used as the expanded player's title:
+
+| Group | Motion names, in display order |
+| --- | --- |
+| MorphMimic · X2 | 踢步组合 / Kick-step sequence; 转身舞步 / Turning dance; 全身舞蹈 / Full-body dance |
+| MorphMimic · H2 | 嘻哈舞步 / Hip-hop steps; 拉丁踢步 / Latin kicks; 空击拳 / Shadowboxing |
+| Any2Any × SONIC · H2 | 交叉步转身 / Crossover turn; 蓄力高跳 / Power jump; 萨尔萨舞 / Salsa steps |
